@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import Footer from "./components/common/Footer";
 import Header from "./components/common/Header";
 import LoginPage from "./components/loginPage/LoginPage";
 import RegistrationPage from "./components/registrationPage/RegistrationPage";
@@ -14,6 +15,7 @@ function App() {
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/routine" element={<Routine />} />
       </Routes>
+      <Footer />
     </>
   );
 }
