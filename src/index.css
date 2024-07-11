@@ -2,4 +2,36 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
+  font-family: "Montserrat", sans-serif;
+}
+body {
+  background-color: #f5f5f5;
+}
+.container {
+  margin: 0 80px;
+  height: inherit;
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    margin: 0;
+  }
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 400px;
+  height: 70px;
+  display: block;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #747474;
+  border: 1px solid #bfbfbf;
+  font-weight: 500;
+}
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
+  color: #bfbfbf;
 }

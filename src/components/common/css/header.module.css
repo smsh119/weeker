@@ -1,0 +1,23 @@
+.brandingDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.brandingText {
+  font-size: 1.5rem;
+}
+.usernameText {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.blackStrip {
+  background-color: black;
+  width: 100%;
+  height: 60px;
+}
+.navBtn {
+  margin: 15px;
+  height: 30px;
+  cursor: pointer;
+}
