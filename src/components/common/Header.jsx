@@ -1,7 +1,11 @@
+import { useLocation } from "react-router-dom";
 import styles from "./css/header.module.css";
 import Navbar from "./Navbar";
 
 const Header = () => {
+  const { pathname } = useLocation();
+  let showNavBar = true;
+  if (pathname === "/login" || pathname === "/register") showNavBar = false;
   return (
     <>
       <div className={`container ${styles.brandingDiv}`}>
@@ -9,9 +13,7 @@ const Header = () => {
         {/* <p className={`${styles.usernameText}`}>Hello Mr. X!</p> */}
       </div>
 
-      <div className={`${styles.blackStrip}`}>
-        <Navbar />
-      </div>
+      <div className={`${styles.blackStrip}`}>{showNavBar && <Navbar />}</div>
     </>
   );
 };
