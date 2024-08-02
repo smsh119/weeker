@@ -21,6 +21,14 @@
   color: white;
   font-weight: bold;
   border-radius: 15px;
+  cursor: pointer;
+  transition-duration: 200ms;
+}
+.form > button:hover {
+  background-color: rgb(65, 65, 65);
+}
+.form > button:active {
+  background-color: black;
 }
 
 .form > div > p {

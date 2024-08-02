@@ -1,5 +1,5 @@
-import Bars from "../../assets/bars-solid.svg";
 import styles from "./css/header.module.css";
+import Navbar from "./Navbar";
 
 const Header = () => {
   return (
@@ -10,9 +10,7 @@ const Header = () => {
       </div>
 
       <div className={`${styles.blackStrip}`}>
-        <div className="container">
-          <img src={Bars} className={styles.navBtn} />
-        </div>
+        <Navbar />
       </div>
     </>
   );
