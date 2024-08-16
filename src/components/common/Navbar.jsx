@@ -7,20 +7,21 @@ import styles from "./css/navbar.module.css";
 const Navbar = () => {
   const [navVisibleClass, setNavVisibleClass] = useState(styles.hideNav);
 
+  function hideNav() {
+    setNavVisibleClass(styles.hideNav);
+  }
+  function showNav() {
+    setNavVisibleClass(styles.showNav);
+  }
+
   return (
     <>
-      <div
-        className="container"
-        onClick={() => setNavVisibleClass(styles.showNav)}
-      >
+      <div className="container" onClick={showNav}>
         <img src={Bars} className={styles.navBtn} />
       </div>
 
       <nav className={`${styles.nav} ${navVisibleClass}`}>
-        <div
-          className={styles.closeBtn}
-          onClick={() => setNavVisibleClass(styles.hideNav)}
-        >
+        <div className={styles.closeBtn} onClick={hideNav}>
           <img src={CloseIcon} width="30px" alt="Close Button" />
         </div>
         <ul>
@@ -28,6 +29,7 @@ const Navbar = () => {
             <NavLink
               to="/routine"
               className={({ isActive }) => (isActive ? styles.navActive : "")}
+              onClick={hideNav}
             >
               Routine
             </NavLink>
@@ -36,6 +38,7 @@ const Navbar = () => {
             <NavLink
               to="/settings"
               className={({ isActive }) => (isActive ? styles.navActive : "")}
+              onClick={hideNav}
             >
               Settings
             </NavLink>
@@ -44,6 +47,7 @@ const Navbar = () => {
             <NavLink
               to="/logout"
               className={({ isActive }) => (isActive ? styles.navActive : "")}
+              onClick={hideNav}
             >
               Logout
             </NavLink>
