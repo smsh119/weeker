@@ -33,7 +33,7 @@ const routine = () => {
               {tasks?.map((task) => (
                 <div className={styles.segment}>
                   {task?.map((singleTask) => (
-                    <p>{singleTask}</p>
+                    <p className={styles.task}>{singleTask}</p>
                   ))}
                 </div>
               ))}
