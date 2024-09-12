@@ -23,18 +23,30 @@ const routine = () => {
 
       <div className={styles.routineSection}>
         <div className={styles.timeColumn}>
-          {hours.map((hour) => (
-            <div>{hour}</div>
+          {hours.map((hour, indx) => (
+            <div key={indx}>{hour}</div>
           ))}
         </div>
         <div className={styles.gridColumn}>
-          {allTasks?.map((tasks) => (
-            <div className={styles.column}>
-              {tasks?.map((task) => (
-                <div className={styles.segment}>
-                  {task?.map((singleTask) => (
-                    <p className={styles.task}>{singleTask}</p>
-                  ))}
+          {allTasks?.map((tasks, indx) => (
+            <div key={indx} className={styles.column}>
+              {/* tasks in columns */}
+              {tasks?.map((tasksInSegment, indx) => (
+                <div key={indx} className={styles.segment}>
+                  {/* task count in segment*/}
+                  {tasksInSegment.length > 0 ? (
+                    <span className={styles.taskCount}>
+                      {tasksInSegment.length}
+                    </span>
+                  ) : null}
+                  <div className={styles.tasks}>
+                    {/* tasks in segment */}
+                    {tasksInSegment?.map((singleTask, indx) => (
+                      <p key={indx} className={styles.task}>
+                        {singleTask}
+                      </p>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
