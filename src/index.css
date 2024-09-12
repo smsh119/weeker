@@ -1,3 +1,13 @@
+:root {
+  --color-1: #f5f5f5;
+  --color-2: #bfbfbf;
+  --color-3: #747474;
+  --color-4: #252525;
+  --color-5: #000000;
+  --color-6: #ff8989;
+  --color-7: #f7b131;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,7 +16,7 @@
   font-family: "Montserrat", sans-serif;
 }
 body {
-  background-color: #f5f5f5;
+  background-color: var(--color-1);
   min-height: 100vh;
   position: relative;
 }
@@ -30,14 +40,14 @@ input[type="password"] {
   border-radius: 15px;
   text-align: center;
   font-size: 1.5rem;
-  color: #747474;
-  border: 1px solid #bfbfbf;
+  color: var(--color-3);
+  border: 1px solid var(--color-2);
   font-weight: 500;
 }
 input[type="text"]::placeholder,
 input[type="email"]::placeholder,
 input[type="password"]::placeholder {
-  color: #bfbfbf;
+  color: var(--color-2);
 }
 
 .formError {

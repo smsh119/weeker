@@ -32,7 +32,7 @@
 }
 
 .form > div > p {
-  color: #bfbfbf;
+  color: var(--color-2);
   font-weight: bold;
 }
 

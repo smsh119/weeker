@@ -2,7 +2,7 @@ export const data = {
   startHour: 7,
   allTasks: [
     [
-      ["work hard"],
+      ["work hard", "End project", "google results"],
       [],
       [],
       [],
