@@ -2,6 +2,7 @@ import { data } from "../../services/dummyData";
 import formatHour from "../../utils/formatHour";
 import RoutineHeader from "./RoutineHeader";
 import styles from "./routinePage.module.css";
+
 const routine = () => {
   const hours = [];
   const startHour = data.startHour;
@@ -19,6 +20,12 @@ const routine = () => {
 
   return (
     <div className="container">
+      {/* TODO: finish modal styling and functionality */}
+      {/* <Modal heading="Tasks">
+        <p>task</p>
+        <p>task</p>
+        <p>task</p>
+      </Modal> */}
       <RoutineHeader styles={styles} />
 
       <div className={styles.routineSection}>
