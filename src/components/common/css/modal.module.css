@@ -29,3 +29,22 @@
   border: 2px solid var(--color-5);
   border-radius: 1rem;
 }
+
+.closeBtn {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  font-weight: bold;
+  padding: 0.3em 0.6em;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  background-color: var(--color-9);
+  color: var(--color-5);
+  border: none;
+  transition: background-color 200ms;
+}
+
+.closeBtn:hover {
+  background-color: var(--color-7);
+}

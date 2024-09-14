@@ -1,9 +1,15 @@
+import { useState } from "react";
 import { data } from "../../services/dummyData";
 import formatHour from "../../utils/formatHour";
+import Modal from "../common/Modal";
+import HourTaskBoard from "./HourTaskBoard";
 import RoutineHeader from "./RoutineHeader";
 import styles from "./routinePage.module.css";
 
 const routine = () => {
+  // states
+  const [showHourTaskBoard, setShowHourTaskBoard] = useState(false);
+
   const hours = [];
   const startHour = data.startHour;
   for (let i = 1; i < 25; i++) {
@@ -21,11 +27,11 @@ const routine = () => {
   return (
     <div className="container">
       {/* TODO: finish modal styling and functionality */}
-      {/* <Modal heading="Tasks">
-        <p>task</p>
-        <p>task</p>
-        <p>task</p>
-      </Modal> */}
+      {showHourTaskBoard && (
+        <Modal onClose={() => setShowHourTaskBoard(false)}>
+          <HourTaskBoard />
+        </Modal>
+      )}
       <RoutineHeader styles={styles} />
 
       <div className={styles.routineSection}>
@@ -46,7 +52,10 @@ const routine = () => {
                       {tasksInSegment.length}
                     </span>
                   ) : null}
-                  <div className={styles.tasks}>
+                  <div
+                    className={styles.tasks}
+                    onClick={() => setShowHourTaskBoard(true)}
+                  >
                     {/* tasks in segment */}
                     {tasksInSegment?.map((singleTask, indx) => (
                       <p key={indx} className={styles.task}>
