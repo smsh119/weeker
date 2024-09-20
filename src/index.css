@@ -39,9 +39,6 @@ body {
 }
 
 @media screen and (max-width: 920px) {
-  body {
-    width: 920px;
-  }
   .container {
     width: 100%;
     margin: 0;
@@ -51,10 +48,10 @@ body {
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-  width: 400px;
-  height: 70px;
+  width: 23rem;
+  height: 4rem;
   display: block;
-  border-radius: 15px;
+  border-radius: 10px;
   text-align: center;
   font-size: 1.5rem;
   color: var(--color-3);

@@ -1,6 +1,9 @@
 .routineHeader {
   display: flex;
   margin-top: -50px;
+  padding: 0 10px;
+  justify-content: space-between;
+  gap: 5px;
 }
 
 /* this is the space span on the black strip of header */
@@ -17,8 +20,8 @@
   list-style-type: none;
   justify-content: space-around;
   gap: var(--task-grid-column-gap);
-  min-width: var(--task-column-min-width);
   flex-basis: var(--task-segment-width);
+  padding: 0;
 }
 
 .routineHeader > ul > li {
@@ -27,7 +30,7 @@
   font-size: 0.8rem;
   background-color: var(--color-4);
   border-radius: 10px;
-  flex-basis: 100%;
+  flex-basis: var(--task-column-width);
   min-width: var(--task-column-min-width);
   height: 2.5rem;
   text-align: center;
@@ -37,7 +40,7 @@
 
 /* routine section starts here  */
 .routineSection {
-  padding: 30px 0;
+  padding: 30px 10px;
   display: flex;
   gap: 5px;
 }
