@@ -11,8 +11,9 @@
   font-weight: bold;
 }
 
+/* work pending with fixing this blackStrip styles */
 .blackStrip {
   background-color: black;
-  width: max(calc(100vh + 15px), 100%);
+  width: max(100%);
   height: 60px;
 }

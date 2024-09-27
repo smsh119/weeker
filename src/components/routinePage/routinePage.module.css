@@ -38,6 +38,16 @@
   align-content: center;
 }
 
+@media screen and (max-width: 600px) {
+  .routineHeader > span {
+    width: calc(var(--time-column-width) - 5rem);
+  }
+
+  .routineHeader > ul > li {
+    font-size: 0.4rem;
+  }
+}
+
 /* routine section starts here  */
 .routineSection {
   padding: 30px 10px;
@@ -122,4 +132,29 @@
   background-color: var(--color-6);
   padding: 2px 8px;
   border-radius: 50%;
+}
+
+@media screen and (max-width: 600px) {
+  .timeColumn {
+    flex-basis: calc(var(--time-column-width) - 5rem);
+  }
+
+  .timeColumn > div {
+    font-size: 0.5rem;
+    height: calc(var(--task-segment-height) - 2rem);
+  }
+
+  .segment {
+    height: calc(var(--task-segment-height) - 2rem);
+  }
+
+  .segment .task {
+    font-size: 0.4rem;
+    padding: 2px 0;
+  }
+
+  .segment .taskCount {
+    font-size: 1rem;
+    padding: 2px 8px;
+  }
 }

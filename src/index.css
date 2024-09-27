@@ -14,8 +14,9 @@
   --color-11-darker: rgb(0, 187, 25);
 
   --time-column-width: 8rem;
+  --time-column-width-sm: 5rem;
   --task-column-width: 10rem;
-  --task-column-min-width: 5rem;
+  --task-column-min-width: 0;
   --task-grid-column-gap: 5px;
   --task-grid-row-gap: 15px;
   --task-segment-height: 5rem;
@@ -40,7 +41,6 @@ body {
 
 @media screen and (max-width: 920px) {
   .container {
-    width: 100%;
     margin: 0;
   }
 }
