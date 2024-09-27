@@ -24,6 +24,7 @@
 .modalBody {
   position: relative;
   width: 50%;
+  max-width: 700px;
   background-color: var(--color-1);
   padding: 1rem;
   border: 2px solid var(--color-5);

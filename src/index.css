@@ -45,6 +45,13 @@ body {
   }
 }
 
+@media screen and (min-width: 1300px) {
+  .container {
+    margin: 0 auto;
+    width: 1300px;
+  }
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {

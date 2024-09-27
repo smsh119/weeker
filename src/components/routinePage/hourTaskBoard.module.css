@@ -33,6 +33,7 @@
 
 .task p {
   font-weight: bold;
+  text-align: left;
 }
 
 /* task delete button */
