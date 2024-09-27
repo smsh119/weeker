@@ -30,6 +30,12 @@
   border-radius: 1rem;
 }
 
+@media screen and (max-width: 600px) {
+  .modalBody {
+    width: 100%;
+  }
+}
+
 .closeBtn {
   position: absolute;
   top: 0.8rem;
