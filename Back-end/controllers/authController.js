@@ -73,7 +73,7 @@ const loginUser = async (req, res) => {
     // generate jwt token
     const payload = { fullname: user.fullname, email: user.email };
     const token = generateJWT(payload, "7d");
-    res.cookie("Token", token);
+    res.cookie("Token", token, { httpOnly: true });
 
     res.status(200).json();
   } catch (err) {

@@ -5,9 +5,12 @@ const { dbConnect } = require("./db.js");
 const User = require("./models/user.js");
 const TaskCollection = require("./models/taskCollection.js");
 
-// Routes
+// Routes Imports
 const authRoutes = require("./routes/authRoutes.js");
 const tasksRoutes = require("./routes/tasksRoutes.js");
+
+// Middleware imports
+const authenticate = require("./middlewares/authenticate.js");
 
 // Middlewares
 const app = express();
@@ -27,9 +30,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/tasks", tasksRoutes);
 
 //test route        TODO: need to remove this
-// app.get("/api/test", async (req, res) => {
-//   console.log("cookie from req :", req.cookies.Token);
-//   // console.log("cookie from req header : ", req.header.cookie);
+app.get("/api/test", authenticate, async (req, res) => {
+  console.log("User :", req?.user);
+  // console.log("cookie from req header : ", req.header.cookie);
 
-//   res.status(200).json();
-// });
+  res.status(200).json();
+});
