@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const { validationResult } = require("express-validator");
 const User = require("../models/user.js");
 const TaskCollection = require("../models/taskCollection.js");
+const { generateJWT } = require("../utils/utils.js");
 
 const registerUser = async (req, res) => {
   const { errors } = validationResult(req);
@@ -33,11 +34,52 @@ const registerUser = async (req, res) => {
 
     res.status(201).json();
   } catch (err) {
-    res.status(500).json({ errors: ["Internal Server Error!"] });
     console.log(err);
+    res.status(500).json({ errors: ["Internal Server Error!"] });
   }
 
   res.status(201).json();
 };
 
-module.exports = { registerUser };
+const loginUser = async (req, res) => {
+  // form validation
+  const { errors } = validationResult(req);
+  if (errors.length > 0) {
+    res.status(401).json({ errors: errors.map((err) => err.msg) });
+    return;
+  }
+
+  try {
+    const userInfo = req.body;
+
+    // check user in the db
+    const user = await User.findOne({ email: userInfo.email });
+    if (!user) {
+      res
+        .status(401)
+        .json({ errors: ["Wrong email or password! Please try again."] });
+      return;
+    }
+
+    // check pass validation
+    const isValid = await bcrypt.compare(userInfo.password, user.password);
+    if (!isValid) {
+      res
+        .status(401)
+        .json({ errors: ["Wrong email or password! Please try again."] });
+      return;
+    }
+
+    // generate jwt token
+    const payload = { fullname: user.fullname, email: user.email };
+    const token = generateJWT(payload, "7d");
+    res.cookie("Token", token);
+
+    res.status(200).json();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ errors: ["Internal Server Error!"] });
+  }
+};
+
+module.exports = { registerUser, loginUser };
