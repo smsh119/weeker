@@ -2,8 +2,6 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const { dbConnect } = require("./db.js");
-const User = require("./models/user.js");
-const TaskCollection = require("./models/taskCollection.js");
 
 // Routes Imports
 const authRoutes = require("./routes/authRoutes.js");
