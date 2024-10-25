@@ -75,8 +75,40 @@ const getTasks = async (req, res) => {
   }
 };
 
+const deleteTask = async (req, res) => {
+  const { day, time, id } = req.query;
+  if (!day || !time || !id) {
+    res.status(400).json({ errors: ["Invalid request!"] });
+  }
+  const user = req.user;
+  try {
+    const tasks = await TaskCollection.findOne({ userId: user.id });
+    if (!tasks[day]) {
+      res.status(400).json({ errors: ["Invalid day provided!"] });
+      return;
+    } else {
+      let tasksAtTime = tasks[day].get(time);
+      if (!tasksAtTime) {
+        res.status(400).json({ errors: ["Invalid time provided!"] });
+      } else {
+        tasks[day].set(
+          time,
+          tasksAtTime.filter((task) => task._id.toString() !== id)
+        );
+      }
+    }
+    await TaskCollection(tasks).save();
+
+    res.status(200).json();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ errors: ["Internal server error!"] });
+  }
+};
+
 module.exports = {
   addTask,
   getTasks,
+  deleteTask,
   __for_Testing_to_Add_All_taskCollection,
 };

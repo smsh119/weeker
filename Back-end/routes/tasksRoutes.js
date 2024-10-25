@@ -2,6 +2,7 @@ const express = require("express");
 const {
   addTask,
   getTasks,
+  deleteTask,
   __for_Testing_to_Add_All_taskCollection,
 } = require("../controllers/taskController.js");
 
@@ -11,5 +12,6 @@ router.post("/all", __for_Testing_to_Add_All_taskCollection); // TODO: needs to 
 
 router.post("/", addTask);
 router.get("/", getTasks);
+router.delete("/", deleteTask);
 
 module.exports = router;
