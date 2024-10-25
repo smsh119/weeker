@@ -14,9 +14,9 @@ const __for_Testing_to_Add_All_taskCollection = async (req, res) => {
 };
 
 const addTask = async (req, res) => {
+  const user = req.user;
   const data = req.body;
-  const taskCollection = await TaskCollection.find({});
-  const tasks = taskCollection[0];
+  const tasks = await TaskCollection.findOne({ userId: user.id });
   if (!tasks[data.day]) {
     tasks[data.day] = new Map();
     tasks[data.day].set(data.time, [data.task]);
@@ -28,11 +28,9 @@ const addTask = async (req, res) => {
       tasks[data.day].set(data.time, [...tasksAtTime, data.task]);
     }
   }
+  await TaskCollection(tasks).save();
 
-  taskCollection[0] = tasks;
-  await TaskCollection(taskCollection[0]).save();
-
-  res.status(201).json({ status: "Success" });
+  res.status(201).json();
 };
 
 const getTasks = async (req, res) => {};
