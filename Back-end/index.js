@@ -26,11 +26,3 @@ dbConnect(() => {
 // routes
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", authenticate, tasksRoutes);
-
-//test route        TODO: need to remove this
-app.get("/api/test", authenticate, async (req, res) => {
-  console.log("User :", req?.user);
-  // console.log("cookie from req header : ", req.header.cookie);
-
-  res.status(200).json();
-});
