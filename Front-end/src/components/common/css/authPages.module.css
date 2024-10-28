@@ -17,18 +17,24 @@
 .form > button {
   font-size: 1.5rem;
   padding: 0.4em 1.4em;
-  background-color: black;
+  background-color: var(--color-5);
   color: white;
   font-weight: bold;
   border-radius: 15px;
   cursor: pointer;
   transition-duration: 200ms;
+  z-index: 1;
 }
 .form > button:hover {
   background-color: rgb(65, 65, 65);
 }
 .form > button:active {
   background-color: black;
+}
+
+.form > button[disabled] {
+  background-color: var(--color-3);
+  cursor: initial;
 }
 
 .form > div > p {

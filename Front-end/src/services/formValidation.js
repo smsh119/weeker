@@ -1,42 +1,14 @@
-export function validateRegistration(formData) {
-  const fullname = formData.get("fullname").trim();
-  const email = formData.get("email").trim();
-  const password = formData.get("password").trim();
+import { z } from "zod";
 
-  if (!fullname) {
-    return {
-      error: "Full Name required!",
-    };
-  } else if (!email) {
-    return {
-      error: "Email required!",
-    };
-  } else if (!password) {
-    return {
-      error: "Please provide valid password.",
-    };
-  } else {
-    return {
-      message: "Registration successful",
-    };
-  }
-}
+export const RegistrationFormSchema = z.object({
+  fullname: z.string().min(3, { message: "Please enter a valid name!" }),
+  email: z.string().email({ message: "Please provide a valid email!" }),
+  password: z
+    .string()
+    .min(8, { message: "Password must contain more than 8 characters!" }),
+});
 
-export function validateLogin(formData) {
-  const email = formData.get("email").trim();
-  const password = formData.get("password").trim();
-
-  if (!email) {
-    return {
-      error: "Email required!",
-    };
-  } else if (!password) {
-    return {
-      error: "Please provide valid password.",
-    };
-  } else {
-    return {
-      message: "Login successful",
-    };
-  }
-}
+export const LoginFormSchema = z.object({
+  email: z.string().email({ message: "Please provide a valid email!" }),
+  password: z.string().min(1, { message: "Password can not be empty!" }),
+});
