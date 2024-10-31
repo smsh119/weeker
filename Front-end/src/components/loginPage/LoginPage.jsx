@@ -1,20 +1,34 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { LoginFormSchema } from "../../services/formValidation";
+import http from "../../services/httpServices.js";
 import styles from "../common/css/authPages.module.css";
-
 const LoginPage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    setError,
+    clearErrors,
     formState: { errors, isSubmitting },
-  } = useForm({ resolver: zodResolver(LoginFormSchema) });
+  } = useForm({
+    defaultValues: {
+      email: searchParams.get("email") ? searchParams.get("email") : "",
+    },
+    resolver: zodResolver(LoginFormSchema),
+  });
 
-  function onSubmit(data) {
-    // TODO: implement login functionalities
-    console.log(data);
+  async function onSubmit(data) {
+    const res = await http.post("/auth/login", data);
+    if (res?.errors?.length > 0) {
+      setError("root", { type: "manual", message: res.errors[0] });
+      return;
+    }
+    if (res?.status === 200) {
+      navigate(`/routine`);
+    }
   }
 
   return (
@@ -27,6 +41,9 @@ const LoginPage = () => {
           name="email"
           placeholder="Email"
           className={errors?.email ? "inputErrorBorder" : ""}
+          onChange={() =>
+            (errors?.email || errors?.root) && clearErrors(["root", "email"])
+          }
         />
         {errors?.email && (
           <div className="formError">{errors.email.message}</div>
@@ -37,6 +54,10 @@ const LoginPage = () => {
           name="password"
           placeholder="Password"
           className={errors?.password ? "inputErrorBorder" : ""}
+          onChange={() =>
+            (errors?.password || errors?.root) &&
+            clearErrors(["root", "password"])
+          }
         />
         {errors?.password && (
           <div className="formError">{errors.password.message}</div>
@@ -48,7 +69,9 @@ const LoginPage = () => {
         </div>
         <button
           disabled={
-            isSubmitting || Object.keys(errors).length > 0 ? true : false
+            isSubmitting || errors?.email || errors?.password || errors?.root
+              ? true
+              : false
           }
           type="submit"
         >

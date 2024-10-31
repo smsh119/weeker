@@ -17,7 +17,6 @@ const RegistrationPage = () => {
   } = useForm({ resolver: zodResolver(RegistrationFormSchema) });
 
   async function onSubmit(data) {
-    // TODO: implement registration functionalities
     const res = await http.post("/auth/register", data);
     if (res?.errors?.length > 0) {
       setError("root", { type: "manual", message: res.errors[0] });
