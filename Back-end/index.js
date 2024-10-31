@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 const { dbConnect } = require("./db.js");
 
 // Routes Imports
@@ -12,6 +13,7 @@ const authenticate = require("./middlewares/authenticate.js");
 
 // Middlewares
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 dotenv.config();
@@ -26,3 +28,7 @@ dbConnect(() => {
 // routes
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", authenticate, tasksRoutes);
+
+app.get("/api/", (req, res) => {
+  res.status(200).json({ message: "Backend running!" });
+});
