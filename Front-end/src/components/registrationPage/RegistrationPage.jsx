@@ -1,20 +1,31 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import { RegistrationFormSchema } from "../../services/formValidation";
+import http from "../../services/httpServices.js";
 import styles from "../common/css/authPages.module.css";
 
 const RegistrationPage = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    setError,
+    clearErrors,
+    getValues,
     formState: { errors, isSubmitting },
   } = useForm({ resolver: zodResolver(RegistrationFormSchema) });
 
-  function onSubmit(data) {
+  async function onSubmit(data) {
     // TODO: implement registration functionalities
-    console.log(data);
+    const res = await http.post("/auth/register", data);
+    if (res?.errors?.length > 0) {
+      setError("root", { type: "manual", message: res.errors[0] });
+      return;
+    }
+    if (res?.status === 201) {
+      navigate(`/login?email=${getValues("email")}`);
+    }
   }
   return (
     <div className="container">
@@ -36,6 +47,7 @@ const RegistrationPage = () => {
           name="email"
           placeholder="Email"
           className={errors?.email ? "inputErrorBorder" : ""}
+          onChange={() => errors?.root && clearErrors("root")}
         />
         {errors?.email && (
           <div className="formError">{errors.email.message}</div>
@@ -57,7 +69,12 @@ const RegistrationPage = () => {
         </div>
         <button
           disabled={
-            isSubmitting || Object.keys(errors).length > 0 ? true : false
+            isSubmitting ||
+            errors?.fullname ||
+            errors?.email ||
+            errors?.password
+              ? true
+              : false
           }
           type="submit"
         >
