@@ -1,26 +1,24 @@
 import styles from "./hourTaskBoard.module.css";
 
-const HourTaskBoard = () => {
+const HourTaskBoard = ({ tasks, time }) => {
   return (
     <div className={styles.taskBoardContainer}>
       <h2 className={styles.taskBoardHeader}>Tasks</h2>
-      <h3 className={styles.timeRange}>09:00 to 10:00</h3>
+      <h3 className={styles.timeRange}>{time}</h3>
       <div className={styles.tasks}>
-        {/* Item */}
-        <div className={styles.task}>
-          <p>task description</p>
-          <button>delete</button>
-        </div>
-        {/* Item */}
-        <div className={styles.task}>
-          <p>task description</p>
-          <button>delete</button>
-        </div>
-        {/* Item */}
-        <div className={styles.task}>
-          <p>task description</p>
-          <button>delete</button>
-        </div>
+        {/* Items */}
+        {tasks?.length > 0 ? (
+          tasks?.map((task, indx) => (
+            <div className={styles.task} key={indx}>
+              <p>{task?.description}</p>
+              <button>delete</button>
+            </div>
+          ))
+        ) : (
+          <div>
+            <p className={styles.noTask}>Time to add a new task!</p>
+          </div>
+        )}
 
         {/* task input */}
         <div className={`${styles.task} ${styles.taskInputDiv}`}>

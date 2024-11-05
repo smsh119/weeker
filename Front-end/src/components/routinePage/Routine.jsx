@@ -8,7 +8,9 @@ import styles from "./routinePage.module.css";
 
 const routine = () => {
   // states
-  const [showHourTaskBoard, setShowHourTaskBoard] = useState(false);
+  const [hourTaskBoardVisible, setHourTaskBoardVisible] = useState(false);
+  const [modalTasks, setModalTasks] = useState([]);
+  const [modalTime, setModalTime] = useState("");
   const { tasks, loading } = useTasks();
 
   // TODO: make start hour and start day dynamic
@@ -27,13 +29,25 @@ const routine = () => {
     hours.push(formatHour(i + startHour - 1));
   }
 
+  function showHourTaskBoard(selectedTasks, hour) {
+    setHourTaskBoardVisible(true);
+    setModalTasks(selectedTasks);
+    setModalTime(hour);
+  }
+
+  function hideHourTaskBoard() {
+    setHourTaskBoardVisible(false);
+    setModalTasks([]);
+    setModalTasks("");
+  }
+
   if (loading) return null;
   return (
     <div className="container">
       {/* TODO: finish modal styling and functionality */}
-      {showHourTaskBoard && (
-        <Modal onClose={() => setShowHourTaskBoard(false)}>
-          <HourTaskBoard />
+      {hourTaskBoardVisible && (
+        <Modal onClose={hideHourTaskBoard}>
+          <HourTaskBoard tasks={modalTasks} time={modalTime} />
         </Modal>
       )}
       <RoutineHeader styles={styles} />
@@ -58,7 +72,7 @@ const routine = () => {
                   ) : null}
                   <div
                     className={styles.tasks}
-                    onClick={() => setShowHourTaskBoard(true)}
+                    onClick={() => showHourTaskBoard(tasks[day][hour], hour)}
                   >
                     {/* tasks in segment */}
                     {tasks[day][hour]?.map((singleTask, indx) => (

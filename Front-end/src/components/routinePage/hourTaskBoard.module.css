@@ -87,3 +87,8 @@
   font-weight: bold;
   color: black;
 }
+
+.noTask {
+  text-align: center;
+  font-weight: bold;
+}
