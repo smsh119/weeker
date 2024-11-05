@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { data } from "../../services/dummyData";
+import useTasks from "../../hooks/useTasks";
 import formatHour from "../../utils/formatHour";
 import Modal from "../common/Modal";
 import HourTaskBoard from "./HourTaskBoard";
@@ -9,21 +9,25 @@ import styles from "./routinePage.module.css";
 const routine = () => {
   // states
   const [showHourTaskBoard, setShowHourTaskBoard] = useState(false);
+  const { tasks, loading } = useTasks();
 
+  // TODO: make start hour and start day dynamic
+  const days = [
+    "saturday",
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+  ];
   const hours = [];
-  const startHour = data.startHour;
+  const startHour = 7;
   for (let i = 1; i < 25; i++) {
     hours.push(formatHour(i + startHour - 1));
   }
-  const allTasks = data?.allTasks?.map((tasksInDay) => {
-    const tasksSortedByTime = [];
-    for (let i = 0; i < 24; i++) {
-      let x = (i + startHour - 1) % 24;
-      tasksSortedByTime.push(tasksInDay[x]);
-    }
-    return tasksSortedByTime;
-  });
 
+  if (loading) return null;
   return (
     <div className="container">
       {/* TODO: finish modal styling and functionality */}
@@ -41,15 +45,15 @@ const routine = () => {
           ))}
         </div>
         <div className={styles.gridColumn}>
-          {allTasks?.map((tasks, indx) => (
+          {days?.map((day, indx) => (
             <div key={indx} className={styles.column}>
               {/* tasks in columns */}
-              {tasks?.map((tasksInSegment, indx) => (
+              {hours?.map((hour, indx) => (
                 <div key={indx} className={styles.segment}>
                   {/* task count in segment*/}
-                  {tasksInSegment.length > 0 ? (
+                  {tasks[day][hour]?.length > 0 ? (
                     <span className={styles.taskCount}>
-                      {tasksInSegment.length}
+                      {tasks[day][hour]?.length}
                     </span>
                   ) : null}
                   <div
@@ -57,9 +61,9 @@ const routine = () => {
                     onClick={() => setShowHourTaskBoard(true)}
                   >
                     {/* tasks in segment */}
-                    {tasksInSegment?.map((singleTask, indx) => (
+                    {tasks[day][hour]?.map((singleTask, indx) => (
                       <p key={indx} className={styles.task}>
-                        {singleTask}
+                        {singleTask?.description}
                       </p>
                     ))}
                   </div>
