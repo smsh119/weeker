@@ -79,7 +79,7 @@ const loginUser = async (req, res) => {
     const token = generateJWT(payload, "7d");
     res.cookie("Token", token, { httpOnly: true });
 
-    res.status(200).json();
+    res.status(200).json({ name: user.fullname, email: user.email });
   } catch (err) {
     console.log(err);
     res.status(500).json({ errors: ["Internal Server Error!"] });
