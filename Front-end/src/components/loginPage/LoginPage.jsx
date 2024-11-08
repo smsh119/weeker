@@ -1,12 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import { LoginFormSchema } from "../../services/formValidation";
 import http from "../../services/httpServices.js";
 import styles from "../common/css/authPages.module.css";
 const LoginPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { setStorage } = useLocalStorage();
   const {
     register,
     handleSubmit,
@@ -27,6 +29,8 @@ const LoginPage = () => {
       return;
     }
     if (res?.status === 200) {
+      setStorage("name", res.data.name);
+      setStorage("email", res.data.email);
       navigate(`/routine`);
     }
   }
