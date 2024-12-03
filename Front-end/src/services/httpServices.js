@@ -24,7 +24,18 @@ const post = async (url, payload) => {
   }
 };
 
+const del = async (url) => {
+  try {
+    const data = await axios.delete(apiBaseUrl + url);
+    return data;
+  } catch (err) {
+    console.error(err.response.data);
+    return error.response.data;
+  }
+};
+
 export default {
   get,
   post,
+  del,
 };

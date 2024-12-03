@@ -1,6 +1,10 @@
 import styles from "./hourTaskBoard.module.css";
 
-const HourTaskBoard = ({ tasks, time }) => {
+const HourTaskBoard = ({ tasks, time, day, onDelete }) => {
+  function handleDelete(taskId) {
+    onDelete(day, time, taskId);
+  }
+
   return (
     <div className={styles.taskBoardContainer}>
       <h2 className={styles.taskBoardHeader}>Tasks</h2>
@@ -11,7 +15,7 @@ const HourTaskBoard = ({ tasks, time }) => {
           tasks?.map((task, indx) => (
             <div className={styles.task} key={indx}>
               <p>{task?.description}</p>
-              <button>delete</button>
+              <button onClick={() => handleDelete(task._id)}>delete</button>
             </div>
           ))
         ) : (
