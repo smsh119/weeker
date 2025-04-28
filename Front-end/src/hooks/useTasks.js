@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import http from "../services/httpServices.js";
 
-// TODO: fix error handling for accessing routine page without cookie
 const useTasks = () => {
   const [tasks, setTasks] = useState();
   const [loading, setLoading] = useState(true);
@@ -11,7 +10,11 @@ const useTasks = () => {
       setLoading(true);
       try {
         const data = await http.get("/tasks");
-        setTasks(data.data);
+        if (data?.error?.length > 0) {
+          setTasks(data);
+        } else {
+          setTasks(data.data);
+        }
       } catch (err) {
         console.log("error occured in useTasks");
       }

@@ -10,7 +10,9 @@ const get = async (url) => {
     return data;
   } catch (error) {
     console.log(error);
-    return { error: ["Error fetching data!"] };
+    return {
+      error: [{ message: "Error fetching data!", status: error.status }],
+    };
   }
 };
 

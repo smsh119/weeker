@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import useTasks from "../../hooks/useTasks";
 import formatHour from "../../utils/formatHour";
 import Modal from "../common/Modal";
@@ -7,10 +9,12 @@ import RoutineHeader from "./RoutineHeader";
 import styles from "./routinePage.module.css";
 
 const routine = () => {
-  // states
+  // hooks
   const [hourTaskBoardVisible, setHourTaskBoardVisible] = useState(false);
   const [modalOptions, setModalOptions] = useState({ day: "", time: "" });
+  const navigate = useNavigate();
   const { tasks, loading, deleteTask } = useTasks();
+  const { clearStorage } = useLocalStorage();
 
   // TODO: make start hour and start day dynamic
   const days = [
@@ -39,6 +43,16 @@ const routine = () => {
   }
 
   if (loading) return null;
+  if (tasks?.error?.length > 0) {
+    if (tasks.error[0].status === 401) {
+      clearStorage();
+      navigate("/login");
+      return null;
+    } else {
+      // TODO: handle error in UI. Show some error messages.
+      console.log("Error occured!");
+    }
+  }
   return (
     <div className="container">
       {/* TODO: finish modal styling and functionality */}
