@@ -13,7 +13,7 @@ const routine = () => {
   const [hourTaskBoardVisible, setHourTaskBoardVisible] = useState(false);
   const [modalOptions, setModalOptions] = useState({ day: "", time: "" });
   const navigate = useNavigate();
-  const { tasks, loading, deleteTask } = useTasks();
+  const { tasks, loading, deleteTask, addTask } = useTasks();
   const { clearStorage } = useLocalStorage();
 
   // TODO: make start hour and start day dynamic
@@ -63,6 +63,7 @@ const routine = () => {
             time={modalOptions.time}
             day={modalOptions.day}
             onDelete={deleteTask}
+            onAddTask={addTask}
           />
         </Modal>
       )}

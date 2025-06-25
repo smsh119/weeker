@@ -58,6 +58,7 @@
   border-radius: 1rem;
   width: 50%;
   cursor: pointer;
+  border: none;
   transition: background-color 200ms;
   font-weight: bold;
   user-select: none;
@@ -75,6 +76,7 @@
 
 .taskInputDiv {
   height: 4.5rem;
+  transition: max-height 1000ms;
 }
 
 .taskInputDiv .taskInput {
@@ -86,6 +88,18 @@
   font-size: 1rem;
   font-weight: bold;
   color: black;
+  outline: none;
+}
+
+.taskInputDiv button {
+  margin-left: 0.2rem;
+}
+
+@media screen and (max-width: 600px) {
+  .taskInputDiv button {
+    margin-left: 0.1rem;
+    font-size: 0.6rem;
+  }
 }
 
 .noTask {

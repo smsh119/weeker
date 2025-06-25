@@ -13,3 +13,10 @@ export const LoginFormSchema = z.object({
   email: z.string().trim().email({ message: "Please provide a valid email!" }),
   password: z.string().trim().min(1, { message: "Password can not be empty!" }),
 });
+
+export const AddTaskSchema = z.object({
+  taskDescription: z
+    .string()
+    .trim()
+    .min(1, { message: "Please enter the task first." }),
+});

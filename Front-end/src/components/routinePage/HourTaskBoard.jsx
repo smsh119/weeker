@@ -1,10 +1,32 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { AddTaskSchema } from "../../services/formValidation";
 import styles from "./hourTaskBoard.module.css";
 
-const HourTaskBoard = ({ tasks, time, day, onDelete }) => {
+const HourTaskBoard = ({ tasks, time, day, onDelete, onAddTask }) => {
+  const [showTaskInput, setShowTaskInput] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    clearErrors,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(AddTaskSchema),
+  });
+
   function handleDelete(taskId) {
     onDelete(day, time, taskId);
   }
 
+  async function onSubmit(data) {
+    onAddTask(day, time, {
+      color: data?.color ? data?.color : "yellow",
+      description: data?.taskDescription,
+    });
+    clearErrors(["taskDescription"]);
+  }
   return (
     <div className={styles.taskBoardContainer}>
       <h2 className={styles.taskBoardHeader}>Tasks</h2>
@@ -25,19 +47,47 @@ const HourTaskBoard = ({ tasks, time, day, onDelete }) => {
         )}
 
         {/* task input */}
-        <div className={`${styles.task} ${styles.taskInputDiv}`}>
-          <input
-            type="text"
-            placeholder="Task Description"
-            className={styles.taskInput}
-          />
-          <button>Save</button>
-        </div>
+        {showTaskInput && (
+          <form
+            className={`${styles.task} ${styles.taskInputDiv}`}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <input
+              {...register("taskDescription")}
+              type="text"
+              name="taskDescription"
+              placeholder={
+                errors?.taskDescription
+                  ? errors?.taskDescription?.message
+                  : "Task Description"
+              }
+              className={`${styles.taskInput} ${
+                errors?.taskDescription ? "inputErrorBorder" : ""
+              }`}
+            />
+            <div>
+              <button>Save</button>
+              <button
+                onClick={() => {
+                  clearErrors(["taskDescription"]);
+                  setShowTaskInput(false);
+                }}
+              >
+                X
+              </button>
+            </div>
+          </form>
+        )}
 
         {/* add task div */}
-        <div className={styles.addTaskDiv}>
-          <span>+</span> Add Task
-        </div>
+        {!showTaskInput && (
+          <button
+            className={styles.addTaskDiv}
+            onClick={() => setShowTaskInput(true)}
+          >
+            <span>+</span> Add Task
+          </button>
+        )}
       </div>
     </div>
   );

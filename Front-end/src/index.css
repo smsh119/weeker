@@ -78,5 +78,6 @@ input[type="password"]::placeholder {
   margin: -1rem 0 -0.5rem 0;
 }
 input.inputErrorBorder {
-  border: 1px solid var(--color-10);
+  border: 2px solid var(--color-10);
+  outline: none;
 }
