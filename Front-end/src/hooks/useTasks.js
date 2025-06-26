@@ -39,7 +39,7 @@ const useTasks = () => {
       console.log("Sorry! Unexpected error occured!");
     }
   };
-
+  //TODO: get the task as response of add task to add it to the state to fix delete issue after adding on backend
   const addTask = async (day, time, task) => {
     try {
       const res = await http.post(`/tasks`, { day, time, task });

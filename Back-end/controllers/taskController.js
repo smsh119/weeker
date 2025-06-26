@@ -16,9 +16,14 @@ const addTask = async (req, res) => {
         tasks[data.day].set(data.time, [...tasksAtTime, data.task]);
       }
     }
-    await TaskCollection(tasks).save();
-
-    res.status(201).json();
+    const savedTasks = await TaskCollection(tasks).save();
+    const savedTasksAtTime = Object.fromEntries(savedTasks[data.day])[
+      data.time
+    ];
+    savedTasksAtTime.sort((a, b) =>
+      b.createdAt.toString().localeCompare(a.createdAt.toString())
+    );
+    res.status(201).json(savedTasksAtTime[0]);
   } catch (err) {
     console.log(err);
     res.status(500).json({ errors: ["Internal server error!"] });
