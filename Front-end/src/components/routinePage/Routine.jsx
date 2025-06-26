@@ -93,7 +93,11 @@ const routine = () => {
                   >
                     {/* tasks in segment */}
                     {tasks[day][hour]?.map((singleTask, indx) => (
-                      <p key={indx} className={styles.task}>
+                      <p
+                        key={indx}
+                        style={{ backgroundColor: singleTask.color }}
+                        className={styles.task}
+                      >
                         {singleTask?.description}
                       </p>
                     ))}

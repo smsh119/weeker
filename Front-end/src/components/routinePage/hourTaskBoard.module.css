@@ -28,7 +28,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: var(--color-7);
+  /* background-color: var(--color-7); -- color is set dynamically by users choice */
 }
 
 .task p {
@@ -76,6 +76,7 @@
 
 .taskInputDiv {
   height: 4.5rem;
+  background-color: var(--color-7);
   transition: max-height 1000ms;
 }
 
@@ -95,9 +96,29 @@
   margin-left: 0.2rem;
 }
 
+.taskInputDiv .inputButtons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.inputButtons input[type="color"] {
+  width: 1.9rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid white;
+  padding: 0;
+  cursor: pointer;
+  background-color: none;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
 @media screen and (max-width: 600px) {
   .taskInputDiv button {
-    margin-left: 0.1rem;
     font-size: 0.6rem;
   }
 }

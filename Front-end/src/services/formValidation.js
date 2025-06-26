@@ -19,4 +19,5 @@ export const AddTaskSchema = z.object({
     .string()
     .trim()
     .min(1, { message: "Please enter the task first." }),
+  taskColor: z.string().trim().min(1),
 });

@@ -13,6 +13,9 @@ const HourTaskBoard = ({ tasks, time, day, onDelete, onAddTask }) => {
     clearErrors,
     formState: { errors, isSubmitting },
   } = useForm({
+    defaultValues: {
+      taskColor: "#f7b131",
+    },
     resolver: zodResolver(AddTaskSchema),
   });
 
@@ -22,7 +25,7 @@ const HourTaskBoard = ({ tasks, time, day, onDelete, onAddTask }) => {
 
   async function onSubmit(data) {
     onAddTask(day, time, {
-      color: data?.color ? data?.color : "yellow",
+      color: data?.taskColor,
       description: data?.taskDescription,
     });
     clearErrors(["taskDescription"]);
@@ -35,7 +38,11 @@ const HourTaskBoard = ({ tasks, time, day, onDelete, onAddTask }) => {
         {/* Items */}
         {tasks?.length > 0 ? (
           tasks?.map((task, indx) => (
-            <div className={styles.task} key={indx}>
+            <div
+              className={styles.task}
+              key={indx}
+              style={{ backgroundColor: task.color }}
+            >
               <p>{task?.description}</p>
               <button onClick={() => handleDelete(task._id)}>delete</button>
             </div>
@@ -65,7 +72,8 @@ const HourTaskBoard = ({ tasks, time, day, onDelete, onAddTask }) => {
                 errors?.taskDescription ? "inputErrorBorder" : ""
               }`}
             />
-            <div>
+            <div className={styles.inputButtons}>
+              <input {...register("taskColor")} type="color" name="taskColor" />
               <button>Save</button>
               <button
                 onClick={() => {
