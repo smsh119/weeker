@@ -41,14 +41,14 @@ const RegistrationPage = () => {
           <div className="formError">{errors.fullname.message}</div>
         )}
         <input
-          {...register("email")}
+          {...register("email", {
+            onChange: () =>
+              (errors?.root || errors?.email) && clearErrors(["root", "email"]),
+          })}
           type="email"
           name="email"
           placeholder="Email"
           className={errors?.email ? "inputErrorBorder" : ""}
-          onChange={() =>
-            (errors?.root || errors?.email) && clearErrors(["root", "email"])
-          }
         />
         {errors?.email && (
           <div className="formError">{errors.email.message}</div>

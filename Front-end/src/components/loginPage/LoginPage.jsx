@@ -40,28 +40,28 @@ const LoginPage = () => {
       <h1 className={styles.pageTitle}>Weeker!</h1>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <input
-          {...register("email")}
+          {...register("email", {
+            onChange: () =>
+              (errors?.email || errors?.root) && clearErrors(["root", "email"]),
+          })}
           type="email"
           name="email"
           placeholder="Email"
           className={errors?.email ? "inputErrorBorder" : ""}
-          onChange={() =>
-            (errors?.email || errors?.root) && clearErrors(["root", "email"])
-          }
         />
         {errors?.email && (
           <div className="formError">{errors.email.message}</div>
         )}
         <input
-          {...register("password")}
+          {...register("password", {
+            onChange: () =>
+              (errors?.password || errors?.root) &&
+              clearErrors(["root", "password"]),
+          })}
           type="password"
           name="password"
           placeholder="Password"
           className={errors?.password ? "inputErrorBorder" : ""}
-          onChange={() =>
-            (errors?.password || errors?.root) &&
-            clearErrors(["root", "password"])
-          }
         />
         {errors?.password && (
           <div className="formError">{errors.password.message}</div>
