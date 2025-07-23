@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Footer from "./components/common/Footer";
 import Header from "./components/common/Header";
 import LoginPage from "./components/loginPage/LoginPage";
+import Logout from "./components/logout/logout";
 import RegistrationPage from "./components/registrationPage/RegistrationPage";
 import Routine from "./components/routinePage/Routine";
 import AuthRoutes from "./routes/AuthRoutes";
@@ -19,6 +20,7 @@ function App() {
         </Route>
         <Route element={<PrivateRoutes />}>
           <Route path="/routine" element={<Routine />} />
+          <Route path="/logout" element={<Logout />} />
         </Route>
       </Routes>
       <Footer />
