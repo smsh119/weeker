@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { createPortal } from "react-dom";
 import styles from "./css/modal.module.css";
 
 const Modal = ({ children, onClose, heading }) => {
   const mountElement = document.body;
-  const elementDiv = document.createElement("div");
+  const elementDiv = useMemo(() => document.createElement("div"), []);
 
   useEffect(() => {
     mountElement.appendChild(elementDiv);
