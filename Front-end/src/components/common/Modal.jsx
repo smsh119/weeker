@@ -8,8 +8,10 @@ const Modal = ({ children, onClose, heading }) => {
 
   useEffect(() => {
     mountElement.appendChild(elementDiv);
+    document.body.style.overflow = "hidden";
     return () => {
       mountElement.removeChild(elementDiv);
+      document.body.style.overflow = "auto";
     };
   }, [mountElement, elementDiv]);
 
