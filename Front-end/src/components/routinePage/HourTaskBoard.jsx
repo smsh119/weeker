@@ -10,7 +10,7 @@ const HourTaskBoard = ({ tasks, time, day, onDelete, onAddTask }) => {
   const {
     register,
     handleSubmit,
-    clearErrors,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
@@ -28,7 +28,7 @@ const HourTaskBoard = ({ tasks, time, day, onDelete, onAddTask }) => {
       color: data?.taskColor,
       description: data?.taskDescription,
     });
-    clearErrors(["taskDescription"]);
+    reset();
   }
   return (
     <div className={styles.taskBoardContainer}>
@@ -77,7 +77,7 @@ const HourTaskBoard = ({ tasks, time, day, onDelete, onAddTask }) => {
               <button>Save</button>
               <button
                 onClick={() => {
-                  clearErrors(["taskDescription"]);
+                  reset();
                   setShowTaskInput(false);
                 }}
               >
