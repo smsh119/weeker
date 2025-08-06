@@ -28,8 +28,8 @@ const routine = () => {
   ];
   const hours = [];
   const startHour = 6;
-  for (let i = 1; i < 25; i++) {
-    hours.push(formatHour(i + startHour - 1));
+  for (let i = 0; i < 24; i++) {
+    hours.push(formatHour(i + startHour));
   }
 
   function showHourTaskBoard(day, hour) {
