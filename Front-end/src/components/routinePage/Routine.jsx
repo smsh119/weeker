@@ -27,7 +27,7 @@ const routine = () => {
     "friday",
   ];
   const hours = [];
-  const startHour = 7;
+  const startHour = 6;
   for (let i = 1; i < 25; i++) {
     hours.push(formatHour(i + startHour - 1));
   }

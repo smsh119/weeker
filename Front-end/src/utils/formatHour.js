@@ -3,7 +3,7 @@ export default function formatHour(hour, format = "12hr") {
   if (!formats.includes(format)) {
     throw new Error("Invalid time format.");
   }
-  let hr = hour <= 24 ? hour : hour % 24;
+  let hr = hour < 24 ? hour : hour % 24;
   let hourText = "";
   if (format !== "12hr") {
     if (hr < 10) {
@@ -13,7 +13,8 @@ export default function formatHour(hour, format = "12hr") {
     }
   } else {
     if (hr === 24 || hr < 12) {
-      if (hr < 10) hourText = `0${hr}:00 AM`;
+      if (hr === 0) hourText = "12:00 AM";
+      else if (hr < 10) hourText = `0${hr}:00 AM`;
       else hourText = `${hr === 24 ? "12" : hr}:00 AM`;
     } else {
       if (hr === 12) hourText = "12:00 PM";

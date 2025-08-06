@@ -11,6 +11,7 @@ const HourTaskBoard = ({ tasks, time, day, onDelete, onAddTask }) => {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
@@ -18,6 +19,8 @@ const HourTaskBoard = ({ tasks, time, day, onDelete, onAddTask }) => {
     },
     resolver: zodResolver(AddTaskSchema),
   });
+
+  const taskInputBGColor = watch("taskColor");
 
   function handleDelete(taskId) {
     onDelete(day, time, taskId);
@@ -33,7 +36,7 @@ const HourTaskBoard = ({ tasks, time, day, onDelete, onAddTask }) => {
   return (
     <div className={styles.taskBoardContainer}>
       <h2 className={styles.taskBoardHeader}>Tasks</h2>
-      <h3 className={styles.timeRange}>{time}</h3>
+      <h3 className={styles.timeRange}>{`${day} - ${time}`}</h3>
       <div className={styles.tasks}>
         {/* Items */}
         <AnimatePresence>
@@ -68,6 +71,7 @@ const HourTaskBoard = ({ tasks, time, day, onDelete, onAddTask }) => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               className={`${styles.task} ${styles.taskInputDiv}`}
+              style={{ backgroundColor: `${taskInputBGColor}` }}
               onSubmit={handleSubmit(onSubmit)}
             >
               <input
