@@ -11,13 +11,16 @@ const tasksRoutes = require("./routes/tasksRoutes.js");
 // Middleware imports
 const authenticate = require("./middlewares/authenticate.js");
 
+// Middlewares
+
+const app = express();
+dotenv.config();
+
 // CORS configuration
 const allowedOrigins = process.env.CORS_ORIGINS
   ? process.env.CORS_ORIGINS.split(",").map((origin) => origin.trim())
   : ["http://localhost:5173"];
 
-// Middlewares
-const app = express();
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -25,7 +28,9 @@ app.use(
         callback(null, true);
       } else {
         callback(
-          new Error("CORS policy has been violated, Origin is not allowed")
+          new Error(
+            `CORS policy has been violated, Origin is not allowed. Request from ${origin}.`
+          )
         );
       }
     },
@@ -34,7 +39,6 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
-dotenv.config();
 
 // Database connection
 dbConnect(() => {
