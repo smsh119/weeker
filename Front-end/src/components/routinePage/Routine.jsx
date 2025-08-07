@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import useTasks from "../../hooks/useTasks";
 import formatHour from "../../utils/formatHour";
+import { getWeekDays } from "../../utils/weekDays";
 import Modal from "../common/Modal";
 import HourTaskBoard from "./HourTaskBoard";
 import RoutineHeader from "./RoutineHeader";
@@ -14,20 +15,12 @@ const routine = () => {
   const [modalOptions, setModalOptions] = useState({ day: "", time: "" });
   const navigate = useNavigate();
   const { tasks, loading, deleteTask, addTask } = useTasks();
-  const { clearStorage } = useLocalStorage();
+  const { clearStorage, getStorage } = useLocalStorage();
 
-  // TODO: make start hour and start day dynamic
-  const days = [
-    "saturday",
-    "sunday",
-    "monday",
-    "tuesday",
-    "wednesday",
-    "thursday",
-    "friday",
-  ];
+  const startDayIndex = getStorage("startDayIndex") || 0;
+  const startHour = getStorage("startHour") || 6;
+  const days = getWeekDays(startDayIndex);
   const hours = [];
-  const startHour = 6;
   for (let i = 0; i < 24; i++) {
     hours.push(formatHour(i + startHour));
   }

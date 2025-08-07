@@ -1,15 +1,17 @@
+import useLocalStorage from "../../hooks/useLocalStorage";
+import { getWeekDays } from "../../utils/weekDays";
+
 const RoutineHeader = ({ styles }) => {
+  const { getStorage } = useLocalStorage();
+  const startDayIndex = getStorage("startDayIndex") || 0;
+  const weekDays = getWeekDays(startDayIndex);
   return (
     <div className={styles.routineHeader}>
       <span></span>
       <ul>
-        <li>Saturday</li>
-        <li>Sunday</li>
-        <li>Monday</li>
-        <li>Tuesday</li>
-        <li>Wednesday</li>
-        <li>Thursday</li>
-        <li>Friday</li>
+        {weekDays.map((day, index) => (
+          <li key={index}>{day}</li>
+        ))}
       </ul>
     </div>
   );
