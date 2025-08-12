@@ -5,6 +5,7 @@ import LoginPage from "./components/loginPage/LoginPage";
 import Logout from "./components/logout/logout";
 import RegistrationPage from "./components/registrationPage/RegistrationPage";
 import Routine from "./components/routinePage/Routine";
+import SettingsPage from "./components/settingsPage/settingsPage";
 import AuthRoutes from "./routes/AuthRoutes";
 import PrivateRoutes from "./routes/PrivateRoutes";
 
@@ -21,6 +22,7 @@ function App() {
         <Route element={<PrivateRoutes />}>
           <Route path="/routine" element={<Routine />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Route>
       </Routes>
       <Footer />
