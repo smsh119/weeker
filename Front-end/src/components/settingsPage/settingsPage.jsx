@@ -1,3 +1,6 @@
+import { getHours } from "../../utils/formatHour.js";
+import { getWeekDays } from "../../utils/weekDays.js";
+import Select from "../common/Select.jsx";
 import styles from "./settingsPage.module.css";
 
 const SettingsPage = () => {
@@ -8,30 +11,12 @@ const SettingsPage = () => {
         <form className={styles.settingsForm}>
           <label htmlFor="startHour">
             <span>Start Hour</span>
-            <select id="startHour" name="startHour" defaultValue={4}>
-              <option value="0">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-            </select>
+            <Select name="startHour" options={getHours(0)} />
           </label>
 
           <label htmlFor="startingDay">
             <span>Starting Day</span>
-            <select id="startingDay" name="startingDay" defaultValue={4}>
-              <option value="0">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-            </select>
+            <Select name="startingDay" options={getWeekDays()} />
           </label>
           <button type="submit">Save</button>
         </form>
