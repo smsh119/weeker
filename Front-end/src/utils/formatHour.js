@@ -1,4 +1,4 @@
-export default function formatHour(hour, format = "12hr") {
+function formatHour(hour, format = "12hr") {
   const formats = ["12hr", "24hr"];
   if (!formats.includes(format)) {
     throw new Error("Invalid time format.");
@@ -25,3 +25,14 @@ export default function formatHour(hour, format = "12hr") {
 
   return hourText;
 }
+
+function getHours(startHour) {
+  const hours = [];
+  for (let i = 0; i < 24; i++) {
+    hours.push(formatHour(i + startHour));
+  }
+
+  return hours;
+}
+
+export { formatHour, getHours };

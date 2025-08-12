@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import useTasks from "../../hooks/useTasks";
-import formatHour from "../../utils/formatHour";
+import { getHours } from "../../utils/formatHour";
 import { getWeekDays } from "../../utils/weekDays";
 import Modal from "../common/Modal";
 import HourTaskBoard from "./HourTaskBoard";
@@ -20,10 +20,7 @@ const routine = () => {
   const startDayIndex = getStorage("startDayIndex") || 0;
   const startHour = getStorage("startHour") || 6;
   const days = getWeekDays(startDayIndex);
-  const hours = [];
-  for (let i = 0; i < 24; i++) {
-    hours.push(formatHour(i + startHour));
-  }
+  const hours = getHours(startHour);
 
   function showHourTaskBoard(day, hour) {
     setHourTaskBoardVisible(true);
