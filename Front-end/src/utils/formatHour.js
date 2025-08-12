@@ -26,7 +26,7 @@ function formatHour(hour, format = "12hr") {
   return hourText;
 }
 
-function getHours(startHour) {
+function getHours(startHour = 6) {
   const hours = [];
   for (let i = 0; i < 24; i++) {
     hours.push(formatHour(i + startHour));
