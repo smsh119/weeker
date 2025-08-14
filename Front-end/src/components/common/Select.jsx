@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styles from "./css/select.module.css";
 
-//TODO: Fix auto close of the options window
 const Select = ({ name, options, defaultValue = "Select" }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [selectedValue, setSelectedValue] = useState(defaultValue);
@@ -32,6 +31,15 @@ const Select = ({ name, options, defaultValue = "Select" }) => {
           </div>
         ))}
       </div>
+      {showOptions && (
+        <div
+          className={styles.invisiblePannel}
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowOptions(false);
+          }}
+        />
+      )}
     </div>
   );
 };
