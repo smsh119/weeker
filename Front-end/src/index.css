@@ -18,8 +18,8 @@
   --time-column-width-sm: 5rem;
   --task-column-width: 10rem;
   --task-column-min-width: 0;
-  --task-grid-column-gap: 5px;
-  --task-grid-row-gap: 15px;
+  --task-grid-column-gap: 1px;
+  --task-grid-row-gap: 1px;
   --task-segment-height: 5rem;
 }
 
