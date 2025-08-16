@@ -7,6 +7,7 @@ const { dbConnect } = require("./db.js");
 // Routes Imports
 const authRoutes = require("./routes/authRoutes.js");
 const tasksRoutes = require("./routes/tasksRoutes.js");
+const settingsRoutes = require("./routes/settingsRoutes.js");
 
 // Middleware imports
 const authenticate = require("./middlewares/authenticate.js");
@@ -50,6 +51,7 @@ dbConnect(() => {
 // routes
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", authenticate, tasksRoutes);
+app.use("/api/settings", authenticate, settingsRoutes);
 
 app.get("/api/", (req, res) => {
   res.status(200).json({ message: "Backend running!" });
