@@ -1,22 +1,16 @@
 import { useState } from "react";
 import styles from "./css/select.module.css";
 
-const Select = ({ name, options, defaultValue = "Select" }) => {
+const Select = ({ options, value, onChange }) => {
   const [showOptions, setShowOptions] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(defaultValue);
   function handleSelect(e) {
     e.stopPropagation();
     setShowOptions((prev) => !prev);
   }
 
-  function handleOption(e, value) {
-    e.stopPropagation();
-    setSelectedValue(value);
-    setShowOptions(false);
-  }
   return (
-    <div id={name} className={styles.select} onClick={handleSelect}>
-      <span>{selectedValue}</span>{" "}
+    <div className={styles.select} onClick={handleSelect}>
+      <span>{value || "Select"}</span>{" "}
       <span className={styles.dropdownSymbol}>&#x25BC;</span>
       <div
         className={`${styles.options} ${showOptions ? styles.showOptions : ""}`}
@@ -25,7 +19,9 @@ const Select = ({ name, options, defaultValue = "Select" }) => {
           <div
             key={opt}
             className={styles.option}
-            onClick={(e) => handleOption(e, opt)}
+            onClick={() => {
+              onChange(opt);
+            }}
           >
             {opt}
           </div>
