@@ -23,4 +23,8 @@ const getWeekDays = (startingDayIndex = 0) => {
   return weekDays;
 };
 
-export { getWeekDays };
+const getWeekDay = (dayIndex = 0) => {
+  return days[dayIndex % 7];
+};
+
+export { getWeekDay, getWeekDays };

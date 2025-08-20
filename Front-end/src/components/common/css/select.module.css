@@ -1,0 +1,76 @@
+:root {
+  --select-width: 9rem;
+}
+
+.select {
+  width: var(--select-width);
+  border: 1px solid var(--color-2);
+  position: relative;
+  font-size: 1rem;
+  text-align: center;
+  padding: 0.5rem 0;
+  border-radius: 0.5rem;
+  background-color: var(--color-0);
+  padding: 0.5rem 0;
+  transition: background-color 0.5s;
+  user-select: none;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.select:hover {
+  background-color: var(--color-2);
+}
+
+.options {
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 3;
+  visibility: hidden;
+  opacity: 0;
+  border: 1px solid var(--color-2);
+  width: var(--select-width);
+  background-color: var(--color-0);
+  border-radius: 0 0 0.5rem 0.5rem;
+  height: 16rem;
+  overflow-y: auto;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+.showOptions {
+  visibility: visible;
+  opacity: 1;
+}
+.option {
+  border-bottom: 1px solid var(--color-2);
+  padding: 0.5rem 0;
+  transition: background-color 0.5s;
+  user-select: none;
+}
+.option:last-child {
+  border-bottom: none;
+}
+
+.option:hover {
+  background-color: var(--color-2);
+}
+
+.dropdownSymbol {
+  font-size: 1rem;
+  text-align: center;
+  font-weight: bold;
+  display: inline-block;
+  position: absolute;
+  right: 0.5rem;
+}
+
+.invisiblePannel {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  cursor: auto;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}

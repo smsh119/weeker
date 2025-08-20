@@ -14,6 +14,16 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    settings: {
+      startDayIndex: {
+        type: Number,
+        default: 0,
+      },
+      startHour: {
+        type: Number,
+        default: 6,
+      },
+    },
   },
   { timestamps: true }
 );

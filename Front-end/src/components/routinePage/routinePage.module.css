@@ -72,8 +72,7 @@
   font-size: 1.2rem;
   display: grid;
   place-items: center;
-
-  box-shadow: 1px 1px 5px 2px rgba(50, 50, 0, 0.5);
+  border: 0.2rem solid var(--color-1);
 }
 
 .gridColumn {

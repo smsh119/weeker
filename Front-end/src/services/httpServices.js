@@ -36,8 +36,21 @@ const del = async (url) => {
   }
 };
 
-export default {
+const patch = async (url, payload) => {
+  try {
+    const data = await axios.patch(apiBaseUrl + url, payload);
+    return data;
+  } catch (error) {
+    console.error(error.response.data);
+    return error.response.data;
+  }
+};
+
+const http = {
   get,
   post,
   del,
+  patch,
 };
+
+export default http;
