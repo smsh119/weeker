@@ -31,6 +31,8 @@ const LoginPage = () => {
     if (res?.status === 200) {
       setStorage("name", res.data.name);
       setStorage("email", res.data.email);
+      setStorage("startHour", res.data?.settings?.startHour);
+      setStorage("startDayIndex", res.data?.settings?.startDayIndex);
       navigate(`/routine`);
     }
   }

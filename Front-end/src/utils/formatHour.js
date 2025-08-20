@@ -1,4 +1,5 @@
 function formatHour(hour, format = "12hr") {
+  if (hour === null || hour === undefined) hour = 0;
   const formats = ["12hr", "24hr"];
   if (!formats.includes(format)) {
     throw new Error("Invalid time format.");
