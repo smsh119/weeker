@@ -1,6 +1,7 @@
 .brandingDiv {
   display: flex;
   justify-content: space-between;
+  padding: 0 10px;
 }
 
 .brandingText {
@@ -10,10 +11,14 @@
   font-size: 1.5rem;
   font-weight: bold;
 }
+.userIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
 
 /* work pending with fixing this blackStrip styles */
 .blackStrip {
   background-color: black;
-  width: max(100%);
+  width: 100%;
   height: 60px;
 }

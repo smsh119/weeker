@@ -37,6 +37,7 @@
 .task p {
   font-weight: bold;
   text-align: left;
+  user-select: text;
 }
 
 /* task delete button */
@@ -106,18 +107,21 @@
 }
 
 .inputButtons input[type="color"] {
-  width: 1.9rem;
+  width: 2rem;
   height: 2rem;
-  border-radius: 50%;
-  border: 1px solid white;
-  padding: 0;
+  border-radius: 100%;
+  border: 3px solid white;
   cursor: pointer;
   background-color: none;
 }
 
-input[type="color"]::-webkit-color-swatch {
+.inputButtons input[type="color"]::-webkit-color-swatch {
   border: none;
   border-radius: 50%;
+}
+
+.inputButtons input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
 }
 
 @media screen and (max-width: 600px) {

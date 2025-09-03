@@ -39,13 +39,13 @@
   align-content: center;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 730px) {
   .routineHeader > span {
     width: calc(var(--time-column-width) - 5rem);
   }
 
   .routineHeader > ul > li {
-    font-size: 0.4rem;
+    font-size: 0.35rem;
   }
 }
 
@@ -53,7 +53,6 @@
 .routineSection {
   padding: 30px 10px;
   display: flex;
-  gap: 5px;
 }
 .timeColumn {
   flex-basis: var(--time-column-width);
@@ -64,7 +63,6 @@
 }
 .timeColumn > div {
   background-color: var(--color-6);
-  width: 95%;
   height: var(--task-segment-height);
   border-radius: 15px;
   color: white;
@@ -73,6 +71,8 @@
   display: grid;
   place-items: center;
   border: 0.2rem solid var(--color-1);
+  text-align: center;
+  white-space: nowrap;
 }
 
 .gridColumn {
@@ -132,11 +132,12 @@
   background-color: var(--color-6);
   padding: 2px 8px;
   border-radius: 50%;
+  z-index: 2;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 730px) {
   .timeColumn {
-    flex-basis: calc(var(--time-column-width) - 5rem);
+    flex-basis: calc(var(--time-column-width) - 4.5rem);
   }
 
   .timeColumn > div {
@@ -154,7 +155,7 @@
   }
 
   .segment .taskCount {
-    font-size: 1rem;
-    padding: 2px 8px;
+    font-size: 0.5rem;
+    padding: 3px 6px;
   }
 }
