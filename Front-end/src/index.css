@@ -1,18 +1,75 @@
 :root {
-  --color-0: #ffffff;
-  --color-1: #f5f5f5;
-  --color-2: #bfbfbf;
-  --color-3: #747474;
-  --color-4: #252525;
-  --color-5: #000000;
-  --color-6: #ff8989;
-  --color-7-ligher: #fff2db;
-  --color-7: #f7b131;
-  --color-8: rgba(185, 185, 185, 0.5);
-  --color-9: rgb(255, 89, 89);
-  --color-10: rgb(255, 38, 38);
-  --color-11: rgb(0, 236, 32);
-  --color-11-darker: rgb(0, 187, 25);
+  /* new colors */
+
+  --color-slate-950: #020617;
+  --color-slate-900: #0f172a;
+  --color-slate-850: #111827;
+  --color-slate-800: #1e293b;
+  --color-slate-600: #838a94;
+  --color-slate-400: #94a3b8;
+  --color-slate-50: #f8fafc;
+
+  --color-amber-700: #d17600;
+  --color-amber-500: #f59e0b;
+  --color-amber-100: #fcd34d;
+  --color-amber-50: #fef3c7;
+
+  --color-rose-500: #f43f5e;
+  --color-rose-600: #e11d48;
+
+  /* ── Semantic tokens ── */
+
+  --color-bg: var(--color-slate-950);
+  --color-text: var(--color-slate-50);
+  --color-text-alt: var(--color-slate-900);
+  --color-accent: var(--color-amber-500);
+  --color-accent-light: var(--color-amber-100);
+  --color-accent-dark: var(--color-amber-700);
+  --color-muted: var(--color-slate-400);
+  --color-placeholder: var(--color-slate-600);
+
+  /* header black strip color*/
+  --color-header-black-strip: var(--color-slate-900);
+
+  /* task cell colors */
+  --color-cell-bg: var(--color-slate-800);
+  --color-cell-border: var(--color-slate-850);
+  --color-cell-border-hover: var(--color-amber-100);
+  --color-segment-tast-count: var(--color-amber-50);
+
+  /* hour cell colors */
+  --color-hour-cell-bg: var(--color-slate-800);
+  --color-hour-cell-border: var(--color-slate-850);
+
+  /* modal colors */
+  --color-modal-bg: var(--color-slate-800);
+  --color-modal-border: var(--color-slate-900);
+  --color-modal-overlay: rgba(15, 23, 42, 0.5);
+
+  /* taskboard colors */
+  --color-taskboard-text: var(--color-slate-50);
+  --color-taskboard-no-task-text: var(--color-slate-400);
+  --color-add-task-action: var(--color-amber-500);
+  --color-add-task-action-hover: var(--color-amber-50);
+  --color-add-task-input-bg: var(--color-amber-50);
+
+  /* navbar colors */
+  --color-nav-bg: var(--color-slate-800);
+  --color-nav-link: var(--color-slate-950);
+
+  /* selectbox colors */
+  --color-select-bg: var(--color-slate-800);
+  --color-select-border: var(--color-slate-850);
+  --color-select-options-bg: var(--color-slate-800);
+  --color-select-bg-hover: var(--color-slate-400);
+  --color-select-option-border-bottom: var(--color-slate-900);
+  --color-select-option-bg-hover: var(--color-slate-400);
+
+  --color-danger: var(--color-rose-500);
+  --color-danger-strong: var(--color-rose-600);
+
+
+  /* measurement variables */
 
   --time-column-width: 8rem;
   --time-column-width-sm: 5rem;
@@ -31,11 +88,14 @@
   font-family: "Montserrat", sans-serif;
   user-select: none;
 }
+
 body {
-  background-color: var(--color-1);
+  background-color: var(--color-bg);
+  color: var(--color-text);
   min-height: 100vh;
   position: relative;
 }
+
 .container {
   margin: 0 80px;
   height: inherit;
@@ -63,23 +123,25 @@ input[type="password"] {
   border-radius: 10px;
   text-align: center;
   font-size: 1.5rem;
-  color: var(--color-3);
-  border: 1px solid var(--color-2);
+  color: var(--color-text-alt);
+  border: 1px solid var(--color-text);
   font-weight: 500;
 }
+
 input[type="text"]::placeholder,
 input[type="email"]::placeholder,
 input[type="password"]::placeholder {
-  color: var(--color-2);
+  color: var(--color-placeholder);
 }
 
 .formError {
-  color: red;
+  color: var(--color-danger);
   font-size: 1rem;
   font-weight: bold;
   margin: -1rem 0 -0.5rem 0;
 }
+
 input.inputErrorBorder {
-  border: 2px solid var(--color-10);
+  border: 2px solid var(--color-danger-strong);
   outline: none;
 }

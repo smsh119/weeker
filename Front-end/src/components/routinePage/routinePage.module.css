@@ -1,161 +1,162 @@
 .routineHeader {
-  display: flex;
-  margin-top: -50px;
-  padding: 0 10px;
-  justify-content: space-between;
-  gap: 5px;
+    display: flex;
+    margin-top: -50px;
+    padding: 0 10px;
+    justify-content: space-between;
+    gap: 5px;
 }
 
 /* this is the space span on the black strip of header */
-.routineHeader > span {
-  flex-shrink: 0;
-  display: inline-block;
-  width: var(--time-column-width);
-  z-index: -2000;
+.routineHeader>span {
+    flex-shrink: 0;
+    display: inline-block;
+    width: var(--time-column-width);
+    z-index: -2000;
 }
 
-.routineHeader > ul {
-  flex-grow: 1;
-  display: flex;
-  list-style-type: none;
-  justify-content: space-around;
-  gap: var(--task-grid-column-gap);
-  flex-basis: var(--task-segment-width);
-  padding: 0;
+.routineHeader>ul {
+    flex-grow: 1;
+    display: flex;
+    list-style-type: none;
+    justify-content: space-around;
+    gap: var(--task-grid-column-gap);
+    flex-basis: var(--task-segment-width);
+    padding: 0;
 }
 
-.routineHeader > ul > li {
-  color: white;
-  font-weight: bold;
-  font-size: 0.8rem;
-  text-transform: capitalize;
-  background-color: var(--color-4);
-  border-radius: 10px;
-  flex-basis: var(--task-column-width);
-  min-width: var(--task-column-min-width);
-  height: 2.5rem;
-  text-align: center;
-  display: grid;
-  align-content: center;
+.routineHeader>ul>li {
+    color: var(--color-text);
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: capitalize;
+    background-color: var(--color-bg-dark);
+    border-radius: 10px;
+    flex-basis: var(--task-column-width);
+    min-width: var(--task-column-min-width);
+    height: 2.5rem;
+    text-align: center;
+    display: grid;
+    align-content: center;
 }
 
 @media screen and (max-width: 730px) {
-  .routineHeader > span {
-    width: calc(var(--time-column-width) - 5rem);
-  }
+    .routineHeader>span {
+        width: calc(var(--time-column-width) - 5rem);
+    }
 
-  .routineHeader > ul > li {
-    font-size: 0.35rem;
-  }
+    .routineHeader>ul>li {
+        font-size: 0.35rem;
+    }
 }
 
 /* routine section starts here  */
 .routineSection {
-  padding: 30px 10px;
-  display: flex;
+    padding: 30px 10px;
+    display: flex;
 }
+
 .timeColumn {
-  flex-basis: var(--time-column-width);
-  flex-shrink: 0;
-  display: flex;
-  gap: var(--task-grid-row-gap);
-  flex-direction: column;
+    flex-basis: var(--time-column-width);
+    flex-shrink: 0;
+    display: flex;
+    gap: var(--task-grid-row-gap);
+    flex-direction: column;
 }
-.timeColumn > div {
-  background-color: var(--color-6);
-  height: var(--task-segment-height);
-  border-radius: 15px;
-  color: white;
-  font-weight: bold;
-  font-size: 1.2rem;
-  display: grid;
-  place-items: center;
-  border: 0.2rem solid var(--color-1);
-  text-align: center;
-  white-space: nowrap;
+
+.timeColumn>div {
+    background-color: var(--color-hour-cell-bg);
+    height: var(--task-segment-height);
+    border-radius: 15px;
+    color: var(--color-text);
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: grid;
+    place-items: center;
+    border: 2px solid var(--color-hour-cell-border);
+    text-align: center;
+    white-space: nowrap;
 }
 
 .gridColumn {
-  flex-grow: 1;
-  display: flex;
-  justify-content: space-around;
-  gap: var(--task-grid-column-gap);
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-around;
+    gap: var(--task-grid-column-gap);
 }
 
 .column {
-  display: flex;
-  flex-direction: column;
-  gap: var(--task-grid-row-gap);
-  min-width: var(--task-column-min-width);
-  flex-basis: var(--task-column-width);
+    display: flex;
+    flex-direction: column;
+    gap: var(--task-grid-row-gap);
+    min-width: var(--task-column-min-width);
+    flex-basis: var(--task-column-width);
 }
 
 .segment {
-  height: var(--task-segment-height);
-  position: relative;
+    height: var(--task-segment-height);
+    position: relative;
 }
 
 .segment .tasks {
-  height: inherit;
-  width: inherit;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2px;
-  overflow: hidden;
-  border-radius: 15px;
-  border: 2px solid var(--color-2);
-  background-color: var(--color-1);
-  cursor: pointer;
+    height: inherit;
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    overflow: hidden;
+    border-radius: 15px;
+    border: 2px solid var(--color-cell-border);
+    background-color: var(--color-cell-bg);
+    cursor: pointer;
 }
 
 .segment .tasks:hover {
-  border: 4px solid var(--color-6);
+    border: 4px solid var(--color-cell-border-hover);
 }
 
 .segment .task {
-  color: var(--color-5);
-  font-weight: bold;
-  font-size: 0.9rem;
-  /* background-color: var(--color-7);  -- color is set dynamically by users choice */
-  text-align: center;
-  padding: 2px 0;
+    color: var(--color-text-alt);
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 2px 0;
 }
 
 .segment .taskCount {
-  position: absolute;
-  font-weight: bold;
-  font-size: 1.2rem;
-  top: -5px;
-  right: -5px;
-  color: var(--color-5);
-  background-color: var(--color-6);
-  padding: 2px 8px;
-  border-radius: 50%;
-  z-index: 2;
+    position: absolute;
+    font-weight: bold;
+    font-size: 1.2rem;
+    top: -5px;
+    right: -5px;
+    color: var(--color-text-alt);
+    background-color: var(--color-segment-tast-count);
+    padding: 2px 8px;
+    border-radius: 50%;
+    z-index: 2;
 }
 
 @media screen and (max-width: 730px) {
-  .timeColumn {
-    flex-basis: calc(var(--time-column-width) - 4.5rem);
-  }
+    .timeColumn {
+        flex-basis: calc(var(--time-column-width) - 4.5rem);
+    }
 
-  .timeColumn > div {
-    font-size: 0.5rem;
-    height: calc(var(--task-segment-height) - 2rem);
-  }
+    .timeColumn>div {
+        font-size: 0.5rem;
+        height: calc(var(--task-segment-height) - 2rem);
+    }
 
-  .segment {
-    height: calc(var(--task-segment-height) - 2rem);
-  }
+    .segment {
+        height: calc(var(--task-segment-height) - 2rem);
+    }
 
-  .segment .task {
-    font-size: 0.4rem;
-    padding: 2px 0;
-  }
+    .segment .task {
+        font-size: 0.4rem;
+        padding: 2px 0;
+    }
 
-  .segment .taskCount {
-    font-size: 0.5rem;
-    padding: 3px 6px;
-  }
+    .segment .taskCount {
+        font-size: 0.5rem;
+        padding: 3px 6px;
+    }
 }

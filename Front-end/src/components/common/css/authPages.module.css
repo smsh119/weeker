@@ -14,35 +14,37 @@
   text-align: center;
 }
 
-.form > button {
+.form>button {
   font-size: 1.5rem;
   padding: 0.4em 1.4em;
-  background-color: var(--color-5);
-  color: white;
+  background-color: var(--color-accent);
+  color: var(--color-text-alt);
   font-weight: bold;
   border-radius: 15px;
   cursor: pointer;
   transition-duration: 200ms;
   z-index: 1;
 }
-.form > button:hover {
-  background-color: rgb(65, 65, 65);
-}
-.form > button:active {
-  background-color: black;
+
+.form>button:hover {
+  background-color: var(--color-accent-dark);
 }
 
-.form > button[disabled] {
-  background-color: var(--color-3);
+.form>button:active {
+  background-color: var(--color-accent-light);
+}
+
+.form>button[disabled] {
+  background-color: var(--color-muted);
   cursor: initial;
 }
 
-.form > div > p {
-  color: var(--color-2);
+.form>div>p {
+  color: var(--color-muted);
   font-weight: bold;
 }
 
-.form > div > a {
-  color: black;
+.form>div>a {
+  color: var(--color-accent);
   font-weight: bold;
 }

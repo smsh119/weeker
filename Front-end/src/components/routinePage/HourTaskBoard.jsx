@@ -15,7 +15,7 @@ const HourTaskBoard = ({ tasks, time, day, onDelete, onAddTask }) => {
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
-      taskColor: "#f7b131",
+      taskColor: "#f59e0b",
     },
     resolver: zodResolver(AddTaskSchema),
   });
@@ -83,9 +83,8 @@ const HourTaskBoard = ({ tasks, time, day, onDelete, onAddTask }) => {
                     ? errors?.taskDescription?.message
                     : "Task Description"
                 }
-                className={`${styles.taskInput} ${
-                  errors?.taskDescription ? "inputErrorBorder" : ""
-                }`}
+                className={`${styles.taskInput} ${errors?.taskDescription ? "inputErrorBorder" : ""
+                  }`}
               />
               <div className={styles.inputButtons}>
                 <input

@@ -21,35 +21,37 @@
   font-size: 1.5rem;
 }
 
-.settingsForm > label {
+.settingsForm>label {
   display: flex;
   justify-content: space-between;
   width: 20rem;
 }
 
-.settingsForm > label > span {
+.settingsForm>label>span {
   font-weight: bold;
 }
 
-.settingsForm > button {
+.settingsForm>button {
   font-size: 1.5rem;
   padding: 0.4em 1.4em;
-  background-color: var(--color-5);
-  color: white;
+  background-color: var(--color-accent);
+  color: var(--color-text-alt);
   font-weight: bold;
   border-radius: 15px;
   cursor: pointer;
   transition-duration: 200ms;
   z-index: 1;
 }
-.settingsForm > button:hover {
-  background-color: rgb(65, 65, 65);
-}
-.settingsForm > button:active {
-  background-color: black;
+
+.settingsForm>button:hover {
+  background-color: var(--color-accent-dark);
 }
 
-.settingsForm > button[disabled] {
-  background-color: var(--color-3);
+.settingsForm>button:active {
+  background-color: var(--color-accent-light);
+}
+
+.settingsForm>button[disabled] {
+  background-color: var(--color-muted);
   cursor: initial;
 }

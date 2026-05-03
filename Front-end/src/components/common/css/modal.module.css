@@ -10,7 +10,7 @@
   display: grid;
   justify-items: center;
   align-items: center;
-  background-color: var(--color-8);
+  background-color: var(--color-modal-overlay);
   backdrop-filter: blur(10px);
   z-index: 5;
 }
@@ -20,11 +20,12 @@
   font-size: 1.5rem;
   font-weight: bold;
 }
+
 .modalBody {
   position: relative;
-  background-color: var(--color-1);
+  background-color: var(--color-modal-bg);
   padding: 1rem;
-  border: 2px solid var(--color-1);
+  border: 2px solid var(--color-modal-border);
   border-radius: 1rem;
   max-height: 90vh;
   width: 50%;
@@ -47,12 +48,12 @@
   border-radius: 50%;
   font-size: 1.1rem;
   cursor: pointer;
-  background-color: var(--color-9);
-  color: var(--color-5);
+  background-color: var(--color-danger);
+  color: var(--color-text-alt);
   border: none;
   transition: background-color 200ms;
 }
 
 .closeBtn:hover {
-  background-color: var(--color-7);
+  background-color: var(--color-danger-strong);
 }
