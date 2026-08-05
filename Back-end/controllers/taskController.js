@@ -21,7 +21,7 @@ const addTask = async (req, res) => {
       data.time
     ];
     savedTasksAtTime.sort((a, b) =>
-      a.createdAt.toString().localeCompare(b.createdAt.toString())
+      b.createdAt.toString().localeCompare(a.createdAt.toString())
     );
     res.status(201).json(savedTasksAtTime[0]);
   } catch (err) {
