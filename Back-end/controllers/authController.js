@@ -3,6 +3,9 @@ const { validationResult } = require("express-validator");
 const User = require("../models/user.js");
 const TaskCollection = require("../models/taskCollection.js");
 const { generateJWT } = require("../utils/utils.js");
+const { generateVerificationToken } = require("../utils/utils.js");
+const { sendEmail } = require("../services/emailService.js");
+const { getVerificationEmailHtml } = require("../services/emailTemplates/emailTemplates.js");
 
 const registerUser = async (req, res) => {
   const { errors } = validationResult(req);
@@ -24,13 +27,30 @@ const registerUser = async (req, res) => {
       userInfo.password,
       process.env.SALT_ROUNDS * 1
     );
+
+    // creating verification token for email verification
+    const { verificationToken, hashedToken } = generateVerificationToken();
+
     userInfo.password = hash;
-    const user = await User.create(userInfo);
+    const user = await User.create({
+      ...userInfo,
+      isVerified: false,
+      verificationToken: hashedToken,
+      verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000, // 24 hours
+    });
 
     // creating taskCollection for the new user
     await TaskCollection.create({
       userId: user._id,
     });
+
+    // verification email
+    const verificationUrl = `${process.env.CLIENT_URL}/verify?token=${verificationToken}&email=${user.email}`;
+    const emailHtml = getVerificationEmailHtml({
+      fullname: userInfo.fullname,
+      verificationUrl,
+    });
+    await sendEmail(user.email, "Weeker: Verify your email", emailHtml);
 
     res.status(201).json();
   } catch (err) {
