@@ -4,6 +4,7 @@ const User = require("../models/user.js");
 const TaskCollection = require("../models/taskCollection.js");
 const { generateJWT } = require("../utils/utils.js");
 const { generateVerificationToken } = require("../utils/utils.js");
+const { hashToken } = require("../utils/utils.js");
 const { sendEmail } = require("../services/emailService.js");
 const { getVerificationEmailHtml } = require("../services/emailTemplates/emailTemplates.js");
 
@@ -112,9 +113,53 @@ const loginUser = async (req, res) => {
   }
 };
 
+const verifyEmail = async (req, res) => {
+  const { token, email } = req.body;
+
+  if (!token || !email) {
+    res.status(400).json({ errors: ["Invalid verification link!"] });
+    return;
+  }
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      res.status(400).json({ errors: ["Invalid verification link!"] });
+      return;
+    }
+
+    if (user.isVerified) {
+      res.status(400).json({ errors: ["Email is already verified."] });
+      return;
+    }
+
+    const hashedToken = hashToken(token);
+    if (user.verificationToken !== hashedToken) {
+      res.status(400).json({ errors: ["Invalid verification token!"] });
+      return;
+    }
+
+    if (user.verificationTokenExpiresAt < Date.now()) {
+      res.status(400).json({ errors: ["Verification link has expired."] });
+      return;
+    }
+
+    user.isVerified = true;
+    user.verificationToken = undefined;
+    user.verificationTokenExpiresAt = undefined;
+    await user.save();
+
+    res.status(200).json();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ errors: ["Internal Server Error!"] });
+  }
+};
+
 const logoutUser = async (req, res) => {
   res.clearCookie("Token");
   res.status(200).json();
 };
 
-module.exports = { registerUser, loginUser, logoutUser };
+module.exports = { registerUser, loginUser, logoutUser, verifyEmail };

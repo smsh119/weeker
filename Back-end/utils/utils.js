@@ -13,14 +13,14 @@ const validateJWT = (token) => {
   }
 };
 
+const hashToken = (token) =>
+  crypto.createHash("sha256").update(token).digest("hex");
+
 const generateVerificationToken = () => {
   const verificationToken = crypto.randomBytes(32).toString("hex");
-  const hashedToken = crypto
-    .createHash("sha256")
-    .update(verificationToken)
-    .digest("hex");
+  const hashedToken = hashToken(verificationToken);
 
   return { verificationToken, hashedToken };
 };
 
-module.exports = { generateJWT, validateJWT, generateVerificationToken };
+module.exports = { generateJWT, validateJWT, generateVerificationToken, hashToken };
