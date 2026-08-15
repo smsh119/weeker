@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import { Toaster } from "sonner";
 import Footer from "./components/common/Footer";
 import Header from "./components/common/Header";
 import LoginPage from "./components/loginPage/LoginPage";
@@ -8,6 +9,7 @@ import Routine from "./components/routinePage/Routine";
 import SettingsPage from "./components/settingsPage/settingsPage";
 import AuthRoutes from "./routes/AuthRoutes";
 import PrivateRoutes from "./routes/PrivateRoutes";
+import VerifyEmailPage from "./components/verifyPage/VerifyEmailPage";
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegistrationPage />} />
         </Route>
+        <Route path="/verify" element={<VerifyEmailPage />} />
         <Route element={<PrivateRoutes />}>
           <Route path="/routine" element={<Routine />} />
           <Route path="/logout" element={<Logout />} />
@@ -26,6 +29,7 @@ function App() {
         </Route>
       </Routes>
       <Footer />
+      <Toaster theme="dark" position="top-center" />
     </>
   );
 }
