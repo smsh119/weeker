@@ -6,7 +6,9 @@ const { generateJWT } = require("../utils/utils.js");
 const { generateVerificationToken } = require("../utils/utils.js");
 const { hashToken } = require("../utils/utils.js");
 const { sendEmail } = require("../services/emailService.js");
-const { getVerificationEmailHtml } = require("../services/emailTemplates/emailTemplates.js");
+const {
+  getVerificationEmailHtml,
+} = require("../services/emailTemplates/emailTemplates.js");
 
 const registerUser = async (req, res) => {
   const { errors } = validationResult(req);
@@ -26,7 +28,7 @@ const registerUser = async (req, res) => {
     }
     const hash = await bcrypt.hash(
       userInfo.password,
-      process.env.SALT_ROUNDS * 1
+      process.env.SALT_ROUNDS * 1,
     );
 
     // creating verification token for email verification
@@ -100,13 +102,12 @@ const loginUser = async (req, res) => {
     const token = generateJWT(payload, "7d");
     res.cookie("Token", token, { httpOnly: true });
 
-    res
-      .status(200)
-      .json({
-        name: user.fullname,
-        email: user.email,
-        settings: user?.settings,
-      });
+    res.status(200).json({
+      name: user.fullname,
+      email: user.email,
+      isVerified: user.isVerified,
+      settings: user?.settings,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json({ errors: ["Internal Server Error!"] });
