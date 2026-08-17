@@ -149,6 +149,8 @@ const verifyEmail = async (req, res) => {
     user.isVerified = true;
     user.verificationToken = undefined;
     user.verificationTokenExpiresAt = undefined;
+    user.resendCount = 0;
+    user.lastResendAt = undefined;
     await user.save();
 
     res.status(200).json();
@@ -163,4 +165,70 @@ const logoutUser = async (req, res) => {
   res.status(200).json();
 };
 
-module.exports = { registerUser, loginUser, logoutUser, verifyEmail };
+const RESEND_LIMIT = 3;
+const RESEND_WINDOW_MS = 24 * 60 * 60 * 1000;
+
+const resendVerificationEmail = async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.user.email });
+
+    if (!user) {
+      res.status(400).json({ errors: ["User not found!"] });
+      return;
+    }
+
+    if (user.isVerified) {
+      res.status(400).json({ errors: ["Email is already verified."] });
+      return;
+    }
+
+    const now = Date.now();
+    if (
+      user.lastResendAt &&
+      now - user.lastResendAt.getTime() < RESEND_WINDOW_MS &&
+      user.resendCount >= RESEND_LIMIT
+    ) {
+      res.status(429).json({
+        errors: [
+          "Too many requests. Please try again after 24 hours.",
+        ],
+      });
+      return;
+    }
+
+    if (
+      !user.lastResendAt ||
+      now - user.lastResendAt.getTime() >= RESEND_WINDOW_MS
+    ) {
+      user.resendCount = 0;
+    }
+
+    const { verificationToken, hashedToken } = generateVerificationToken();
+
+    user.verificationToken = hashedToken;
+    user.verificationTokenExpiresAt = now + 24 * 60 * 60 * 1000;
+    user.resendCount = (user.resendCount || 0) + 1;
+    user.lastResendAt = new Date(now);
+    await user.save();
+
+    const verificationUrl = `${process.env.CLIENT_URL}/verify?token=${verificationToken}&email=${user.email}`;
+    const emailHtml = getVerificationEmailHtml({
+      fullname: user.fullname,
+      verificationUrl,
+    });
+    await sendEmail(user.email, "Weeker: Verify your email", emailHtml);
+
+    res.status(200).json();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ errors: ["Internal Server Error!"] });
+  }
+};
+
+module.exports = {
+  registerUser,
+  loginUser,
+  logoutUser,
+  verifyEmail,
+  resendVerificationEmail,
+};

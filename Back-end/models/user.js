@@ -33,6 +33,13 @@ const UserSchema = new mongoose.Schema(
     },
     verificationTokenExpiresAt: {
       type: Date,
+    },
+    resendCount: {
+      type: Number,
+      default: 0,
+    },
+    lastResendAt: {
+      type: Date,
     }
   },
   { timestamps: true }
