@@ -7,7 +7,7 @@ import http from "../../services/httpServices.js";
 const VerifyEmailPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { getStorage } = useLocalStorage();
+  const { getStorage, setStorage } = useLocalStorage();
 
   const token = searchParams.get("token");
   const email = searchParams.get("email");
@@ -25,13 +25,14 @@ const VerifyEmailPage = () => {
       if (res?.errors?.length > 0) {
         toast.error(res.errors[0]);
       } else if (res?.status === 200) {
+        setStorage("isVerified", true);
         toast.success("Email verified successfully!");
       } else {
         toast.error("Something went wrong. Please try again.");
       }
       navigate(target);
     })();
-  }, [token, email, target, navigate]);
+  }, [token, email, target, navigate, setStorage]);
 
   return null;
 };

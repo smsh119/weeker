@@ -23,7 +23,6 @@ const routine = () => {
   const days = getWeekDays(startDayIndex);
   const hours = getHours(startHour);
   const isVerified = getStorage("isVerified");
-  console.log(isVerified)
 
   function showHourTaskBoard(day, hour) {
     setHourTaskBoardVisible(true);

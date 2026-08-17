@@ -71,6 +71,36 @@
   font-size: 0.9rem;
 }
 
+.verifyBannerLink {
+  background: none;
+  border: none;
+  color: var(--color-accent);
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 0.4rem;
+}
+
+.verifyBannerLink:hover {
+  color: var(--color-accent-light);
+}
+
+.verifyBannerLink:disabled {
+  color: var(--color-muted);
+  cursor: default;
+  text-decoration: none;
+}
+
+.verifyBannerCooldown {
+  color: var(--color-muted);
+  font-weight: bold;
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+  display: inline-block;
+}
+
 .segmentLocked {
   cursor: default !important;
 }
