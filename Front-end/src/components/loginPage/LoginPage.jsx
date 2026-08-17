@@ -33,6 +33,7 @@ const LoginPage = () => {
       setStorage("email", res.data.email);
       setStorage("startHour", res.data?.settings?.startHour);
       setStorage("startDayIndex", res.data?.settings?.startDayIndex);
+      setStorage("isVerified", res.data?.isVerified);
       navigate(`/routine`);
     }
   }

@@ -7,6 +7,7 @@ import { getWeekDays } from "../../utils/weekDays";
 import Modal from "../common/Modal";
 import HourTaskBoard from "./HourTaskBoard";
 import RoutineHeader from "./RoutineHeader";
+import VerifyBanner from "./VerifyBanner";
 import styles from "./routinePage.module.css";
 
 const routine = () => {
@@ -21,6 +22,8 @@ const routine = () => {
   const startHour = getStorage("startHour") || 6;
   const days = getWeekDays(startDayIndex);
   const hours = getHours(startHour);
+  const isVerified = getStorage("isVerified");
+  console.log(isVerified)
 
   function showHourTaskBoard(day, hour) {
     setHourTaskBoardVisible(true);
@@ -58,6 +61,7 @@ const routine = () => {
         </Modal>
       )}
       <RoutineHeader styles={styles} />
+      {!isVerified && <VerifyBanner />}
 
       <div className={styles.routineSection}>
         <div className={styles.timeColumn}>
@@ -78,8 +82,8 @@ const routine = () => {
                     </span>
                   ) : null}
                   <div
-                    className={styles.tasks}
-                    onClick={() => showHourTaskBoard(day, hour)}
+                    className={`${styles.tasks} ${!isVerified ? styles.segmentLocked : ""}`}
+                    onClick={isVerified ? () => showHourTaskBoard(day, hour) : undefined}
                   >
                     {/* tasks in segment */}
                     {tasks[day][hour]?.map((singleTask, indx) => (
