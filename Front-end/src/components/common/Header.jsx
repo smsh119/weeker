@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom";
-import UserIcon from "../../assets/user-icon.svg";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import styles from "./css/header.module.css";
 import Navbar from "./Navbar";
@@ -15,11 +14,6 @@ const Header = () => {
         <h1 className={`${styles.brandingText}`}>Weeker!</h1>
         {name && (
           <div>
-            <img
-              src={UserIcon}
-              alt="User Icon"
-              className={`${styles.userIcon}`}
-            />
             <span className={`${styles.usernameText}`}>{name}</span>
           </div>
         )}

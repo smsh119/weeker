@@ -11,7 +11,7 @@
   width: 250px;
   height: 100vh;
   top: 0;
-  box-shadow: 0 5px 10px 5px rgba(50, 50, 0, 0.5);
+  box-shadow: 0 5px 10px 5px rgba(25, 25, 25, 0.5);
   transition: left 200ms linear;
 }
 
@@ -23,17 +23,34 @@
   left: -260px;
 }
 
-.nav>ul {
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-nav-overlay);
+  z-index: 5;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+
+.overlayHidden {
+  display: none;
+}
+
+.overlayVisible {
+  display: block;
+}
+
+.nav > ul {
   margin-top: 50px;
   width: 100%;
 }
 
-.nav>ul>li {
+.nav > ul > li {
   width: 100%;
   filter: drop-shadow(1px 5px 2px rgba(50, 50, 0, 0.5));
 }
 
-.nav>ul>li>a {
+.nav > ul > li > a {
   text-decoration: none;
   display: block;
   color: white;
@@ -47,7 +64,7 @@
   cursor: pointer;
 }
 
-.nav>ul>li>a:hover {
+.nav > ul > li > a:hover {
   background-color: var(--color-accent-light);
   transition-duration: 500ms;
   transition-timing-function: ease;
@@ -55,13 +72,6 @@
 
 .navActive {
   background-color: var(--color-accent) !important;
-}
-
-.closeBtn {
-  float: right;
-  margin-top: 10px;
-  margin-right: 10px;
-  cursor: pointer;
 }
 
 @media screen and (max-width: 730px) {
@@ -73,7 +83,7 @@
     left: -160px;
   }
 
-  .nav>ul>li>a {
+  .nav > ul > li > a {
     font-size: 0.8rem;
     padding: 20px;
   }

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Bars from "../../assets/bars-solid.svg";
-import CloseIcon from "../../assets/circle-xmark-solid.svg";
+import CloseButtonX from "./CloseButtonX";
 import styles from "./css/navbar.module.css";
 
 const Navbar = () => {
@@ -20,10 +20,17 @@ const Navbar = () => {
         <img src={Bars} className={styles.navBtn} />
       </div>
 
+      <div
+        className={`${styles.overlay} ${
+          navVisibleClass === styles.showNav
+            ? styles.overlayVisible
+            : styles.overlayHidden
+        }`}
+        onClick={hideNav}
+      />
+
       <nav className={`${styles.nav} ${navVisibleClass}`}>
-        <div className={styles.closeBtn} onClick={hideNav}>
-          <img src={CloseIcon} width="30px" alt="Close Button" />
-        </div>
+        <CloseButtonX onClose={hideNav} />
         <ul>
           <li>
             <NavLink

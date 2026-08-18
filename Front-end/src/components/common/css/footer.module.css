@@ -3,6 +3,7 @@
   font-size: 1rem;
   font-weight: bold;
   position: absolute;
+  padding-bottom: 6px;
   bottom: 0;
   left: 50%;
   translate: -50% 0;
