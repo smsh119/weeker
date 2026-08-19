@@ -39,53 +39,50 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="container">
-      <h1 className={styles.pageTitle}>Weeker!</h1>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <input
-          {...register("email", {
-            onChange: () =>
-              (errors?.email || errors?.root) && clearErrors(["root", "email"]),
-          })}
-          type="email"
-          name="email"
-          placeholder="Email"
-          className={errors?.email ? "inputErrorBorder" : ""}
-        />
-        {errors?.email && (
-          <div className="formError">{errors.email.message}</div>
-        )}
-        <input
-          {...register("password", {
-            onChange: () =>
-              (errors?.password || errors?.root) &&
-              clearErrors(["root", "password"]),
-          })}
-          type="password"
-          name="password"
-          placeholder="Password"
-          className={errors?.password ? "inputErrorBorder" : ""}
-        />
-        {errors?.password && (
-          <div className="formError">{errors.password.message}</div>
-        )}
-        {errors?.root && <div className="formError">{errors.root.message}</div>}
-        <div>
-          <p>{`Don't have an account?`}</p>
-          <Link to="/register">Register now</Link>
-        </div>
-        <button
-          disabled={
-            isSubmitting || errors?.email || errors?.password || errors?.root
-              ? true
-              : false
-          }
-          type="submit"
-        >
-          Login
-        </button>
-      </form>
-    </div>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <input
+        {...register("email", {
+          onChange: () =>
+            (errors?.email || errors?.root) && clearErrors(["root", "email"]),
+        })}
+        type="email"
+        name="email"
+        placeholder="Email"
+        className={errors?.email ? "inputErrorBorder" : ""}
+      />
+      {errors?.email && (
+        <div className="formError">{errors.email.message}</div>
+      )}
+      <input
+        {...register("password", {
+          onChange: () =>
+            (errors?.password || errors?.root) &&
+            clearErrors(["root", "password"]),
+        })}
+        type="password"
+        name="password"
+        placeholder="Password"
+        className={errors?.password ? "inputErrorBorder" : ""}
+      />
+      {errors?.password && (
+        <div className="formError">{errors.password.message}</div>
+      )}
+      {errors?.root && <div className="formError">{errors.root.message}</div>}
+      <div>
+        <p>{`Don't have an account?`}</p>
+        <Link to="/register">Register now</Link>
+      </div>
+      <button
+        disabled={
+          isSubmitting || errors?.email || errors?.password || errors?.root
+            ? true
+            : false
+        }
+        type="submit"
+      >
+        Login
+      </button>
+    </form>
   );
 };
 

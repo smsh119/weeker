@@ -27,62 +27,59 @@ const RegistrationPage = () => {
     }
   }
   return (
-    <div className="container">
-      <h1 className={styles.pageTitle}>Weeker!</h1>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <input
-          {...register("fullname")}
-          type="text"
-          name="fullname"
-          placeholder="Full Name"
-          className={errors?.fullname ? "inputErrorBorder" : ""}
-        />
-        {errors?.fullname && (
-          <div className="formError">{errors.fullname.message}</div>
-        )}
-        <input
-          {...register("email", {
-            onChange: () =>
-              (errors?.root || errors?.email) && clearErrors(["root", "email"]),
-          })}
-          type="email"
-          name="email"
-          placeholder="Email"
-          className={errors?.email ? "inputErrorBorder" : ""}
-        />
-        {errors?.email && (
-          <div className="formError">{errors.email.message}</div>
-        )}
-        <input
-          {...register("password")}
-          type="password"
-          name="password"
-          placeholder="Password"
-          className={errors?.password ? "inputErrorBorder" : ""}
-        />
-        {errors?.password && (
-          <div className="formError">{errors.password.message}</div>
-        )}
-        {errors?.root && <div className="formError">{errors.root.message}</div>}
-        <div>
-          <p>{`Already have an account?`}</p>
-          <Link to="/login">Log in</Link>
-        </div>
-        <button
-          disabled={
-            isSubmitting ||
-            errors?.fullname ||
-            errors?.email ||
-            errors?.password
-              ? true
-              : false
-          }
-          type="submit"
-        >
-          Register
-        </button>
-      </form>
-    </div>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <input
+        {...register("fullname")}
+        type="text"
+        name="fullname"
+        placeholder="Full Name"
+        className={errors?.fullname ? "inputErrorBorder" : ""}
+      />
+      {errors?.fullname && (
+        <div className="formError">{errors.fullname.message}</div>
+      )}
+      <input
+        {...register("email", {
+          onChange: () =>
+            (errors?.root || errors?.email) && clearErrors(["root", "email"]),
+        })}
+        type="email"
+        name="email"
+        placeholder="Email"
+        className={errors?.email ? "inputErrorBorder" : ""}
+      />
+      {errors?.email && (
+        <div className="formError">{errors.email.message}</div>
+      )}
+      <input
+        {...register("password")}
+        type="password"
+        name="password"
+        placeholder="Password"
+        className={errors?.password ? "inputErrorBorder" : ""}
+      />
+      {errors?.password && (
+        <div className="formError">{errors.password.message}</div>
+      )}
+      {errors?.root && <div className="formError">{errors.root.message}</div>}
+      <div>
+        <p>{`Already have an account?`}</p>
+        <Link to="/login">Log in</Link>
+      </div>
+      <button
+        disabled={
+          isSubmitting ||
+          errors?.fullname ||
+          errors?.email ||
+          errors?.password
+            ? true
+            : false
+        }
+        type="submit"
+      >
+        Register
+      </button>
+    </form>
   );
 };
 

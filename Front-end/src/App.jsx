@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Toaster } from "sonner";
 import Footer from "./components/common/Footer";
 import Header from "./components/common/Header";
@@ -12,9 +12,11 @@ import PrivateRoutes from "./routes/PrivateRoutes";
 import VerifyEmailPage from "./components/verifyPage/VerifyEmailPage";
 
 function App() {
+  const { pathname } = useLocation();
+  const isAuthPage = pathname === "/login" || pathname === "/register";
   return (
     <>
-      <Header />
+      {!isAuthPage && <Header />}
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route element={<AuthRoutes />}>
@@ -28,7 +30,7 @@ function App() {
           <Route path="/settings" element={<SettingsPage />} />
         </Route>
       </Routes>
-      <Footer />
+      {!isAuthPage && <Footer />}
       <Toaster theme="dark" position="top-center" />
     </>
   );

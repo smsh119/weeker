@@ -1,0 +1,34 @@
+.welcomePanel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  font-size: 4rem;
+  color: var(--color-accent);
+}
+
+.tagline {
+  font-size: 1.25rem;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+@media screen and (max-width: 920px) {
+  .welcomePanel {
+    padding-top: 3rem;
+    /* padding-bottom: 2rem; */
+  }
+
+  .logo {
+    font-size: 2.5rem;
+  }
+
+  .tagline {
+    font-size: 1rem;
+  }
+}

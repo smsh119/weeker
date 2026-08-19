@@ -1,8 +1,13 @@
-.pageTitle {
-  text-align: center;
-  font-size: 3.125rem;
-  margin-top: 70px;
-  margin-bottom: 20px;
+.authLayout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.formPanel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form {
@@ -14,7 +19,7 @@
   text-align: center;
 }
 
-.form>button {
+.form > button {
   font-size: 1.5rem;
   padding: 0.4em 1.4em;
   background-color: var(--color-accent);
@@ -26,25 +31,47 @@
   z-index: 1;
 }
 
-.form>button:hover {
+.form > button:hover {
   background-color: var(--color-accent-dark);
 }
 
-.form>button:active {
+.form > button:active {
   background-color: var(--color-accent-light);
 }
 
-.form>button[disabled] {
+.form > button[disabled] {
   background-color: var(--color-muted);
   cursor: initial;
 }
 
-.form>div>p {
+.form > div > p {
   color: var(--color-muted);
   font-weight: bold;
 }
 
-.form>div>a {
+.form > div > a {
   color: var(--color-accent);
   font-weight: bold;
+}
+
+.divider {
+  width: 2px;
+  height: 20rem;
+  align-self: center;
+  margin: 0 auto;
+  background-color: var(--color-slate-800);
+}
+
+@media screen and (max-width: 920px) {
+  .authLayout {
+    flex-direction: column;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .formPanel {
+    padding-bottom: 3rem;
+  }
 }
