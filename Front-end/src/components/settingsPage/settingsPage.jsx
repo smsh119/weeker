@@ -1,4 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import useLocalStorage from "../../hooks/useLocalStorage.js";
 import http from "../../services/httpServices.js";
 import { formatHour, getHours } from "../../utils/formatHour.js";
@@ -35,15 +36,14 @@ const SettingsPage = () => {
     };
     const res = await http.patch("/settings/update", payload);
     if (res?.errors?.length > 0) {
-      //TODO: show error to user.
+      toast.error("Unexpected error occured! Please try again.");
       console.log("Error in settings submission: ", res.errors);
       return;
     }
     if (res?.status === 200) {
       setStorage("startHour", res.data.startHour);
       setStorage("startDayIndex", res.data.startDayIndex);
-      // TODO: let user know data updated succesfully.
-      console.log("settings updated succesfully.");
+      toast.success("Settings updated successfully!");
     }
   }
 

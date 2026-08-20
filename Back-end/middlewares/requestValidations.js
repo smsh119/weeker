@@ -28,16 +28,15 @@ const validateLoginForm = [
 ];
 
 const validateUserSettings = [
-  // TODO: write the validation
   body("startDayIndex")
     .isInt({ min: 0, max: 6 })
     .withMessage(
-      "Please provide the correct starting day for the routine [value between 0 to 6]."
+      "Please provide the correct starting day for the routine [value between 0 to 6].",
     ),
   body("startHour")
     .isInt({ min: 0, max: 23 })
     .withMessage(
-      "Please provide the correct starting hour for the routine [value between 0 to 23]."
+      "Please provide the correct starting hour for the routine [value between 0 to 23].",
     ),
 ];
 

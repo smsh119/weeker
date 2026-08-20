@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import useTasks from "../../hooks/useTasks";
 import { getHours } from "../../utils/formatHour";
@@ -10,7 +11,7 @@ import RoutineHeader from "./RoutineHeader";
 import VerifyBanner from "./VerifyBanner";
 import styles from "./routinePage.module.css";
 
-const routine = () => {
+const Routine = () => {
   // hooks
   const [hourTaskBoardVisible, setHourTaskBoardVisible] = useState(false);
   const [modalOptions, setModalOptions] = useState({ day: "", time: "" });
@@ -41,13 +42,12 @@ const routine = () => {
       navigate("/login");
       return null;
     } else {
-      // TODO: handle error in UI. Show some error messages.
-      console.log("Error occured!");
+      toast.error("Unexpected error occured! Please try again.");
+      console.error("Error occured: ", tasks.error[0]);
     }
   }
   return (
     <div className="container">
-      {/* TODO: finish modal styling and functionality */}
       {hourTaskBoardVisible && (
         <Modal onClose={hideHourTaskBoard}>
           <HourTaskBoard
@@ -105,4 +105,4 @@ const routine = () => {
   );
 };
 
-export default routine;
+export default Routine;

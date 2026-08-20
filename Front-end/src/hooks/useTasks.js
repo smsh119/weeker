@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import http from "../services/httpServices.js";
 
 const useTasks = () => {
@@ -29,13 +30,15 @@ const useTasks = () => {
       const newTasks = { ...tasks };
       const tasksInDay = { ...newTasks[day] };
       const tasksInTime = tasksInDay[time]?.filter(
-        (task) => task?._id !== taskId
+        (task) => task?._id !== taskId,
       );
       tasksInDay[time] = tasksInTime;
       newTasks[day] = tasksInDay;
       setTasks(newTasks);
     } else {
-      // TODO: add a toast notification for this error
+      toast.error(
+        "Unexpected error occured! Task could not be deleted. Please try again.",
+      );
       console.log("Sorry! Unexpected error occured!");
     }
   };
@@ -43,7 +46,6 @@ const useTasks = () => {
     try {
       const res = await http.post(`/tasks`, { day, time, task });
       const newlyAddedTask = res.data;
-      //TODO: check http services and fix error handling
       if (res.status === 201) {
         const newTasks = { ...tasks };
         const tasksInDay = { ...newTasks[day] };
@@ -55,13 +57,16 @@ const useTasks = () => {
         newTasks[day] = tasksInDay;
         setTasks(newTasks);
       } else {
-        // TODO: add a toast notification for this error
-        console.log("Sorry! Could not add the task.");
+        toast.error(
+          "Unexpected error occured! Task could not be added. Please try again.",
+        );
+        console.error(`Status returned: ${res.status} - Could not add task`);
       }
     } catch (err) {
-      //TODO: add a toast
-      console.log("An error occured on catch in useTasks->addTask");
-      console.log(err);
+      toast.error(
+        "Unexpected error occured! Task could not be added. Please try again.",
+      );
+      console.error("An error occured on catch in useTasks -> addTask", err);
     }
   };
 

@@ -25,7 +25,6 @@
   height: 1.5rem;
 }
 
-/* TODO: work pending with fixing this blackStrip styles */
 .blackStrip {
   background-color: var(--color-header-black-strip);
   width: 100%;
