@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import styles from "./css/header.module.css";
 import Navbar from "./Navbar";

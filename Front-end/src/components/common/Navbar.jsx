@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import Bars from "../../assets/bars-solid.svg";
 import CloseButtonX from "./CloseButtonX";
 import styles from "./css/navbar.module.css";

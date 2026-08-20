@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "sonner";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import http from "../../services/httpServices.js";

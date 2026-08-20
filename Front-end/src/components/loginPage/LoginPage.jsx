@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { LoginFormSchema } from "../../services/formValidation";
 import http from "../../services/httpServices.js";
