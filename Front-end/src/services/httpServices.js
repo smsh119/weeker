@@ -9,7 +9,7 @@ const get = async (url) => {
     const data = await axios.get(apiBaseUrl + url);
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return {
       error: [{ message: "Error fetching data!", status: error.status }],
     };
@@ -32,7 +32,7 @@ const del = async (url) => {
     return data;
   } catch (err) {
     console.error(err.response.data);
-    return error.response.data;
+    return err.response.data;
   }
 };
 

@@ -37,7 +37,7 @@ const SettingsPage = () => {
     const res = await http.patch("/settings/update", payload);
     if (res?.errors?.length > 0) {
       toast.error("Unexpected error occured! Please try again.");
-      console.log("Error in settings submission: ", res.errors);
+      console.error("Error in settings submission: ", res.errors);
       return;
     }
     if (res?.status === 200) {

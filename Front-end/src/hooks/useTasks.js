@@ -17,13 +17,13 @@ const useTasks = () => {
           setTasks(data.data);
         }
       } catch (err) {
-        console.log("error occured in useTasks");
+        toast.error("Unexpected error occured! Please try again.");
+        console.error("Error fetching data.");
       }
       setLoading(false);
     };
     fetchData();
   }, []);
-  // console.log(tasks);
   const deleteTask = async (day, time, taskId) => {
     const res = await http.del(`/tasks?day=${day}&time=${time}&id=${taskId}`);
     if (res.status === 200) {
@@ -39,7 +39,7 @@ const useTasks = () => {
       toast.error(
         "Unexpected error occured! Task could not be deleted. Please try again.",
       );
-      console.log("Sorry! Unexpected error occured!");
+      console.error("Unexpected error occured! Task could not be deleted.");
     }
   };
   const addTask = async (day, time, task) => {

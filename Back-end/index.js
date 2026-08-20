@@ -30,21 +30,21 @@ app.use(
       } else {
         callback(
           new Error(
-            `CORS policy has been violated, Origin is not allowed. Request from ${origin}.`
-          )
+            `CORS policy has been violated, Origin is not allowed. Request from ${origin}.`,
+          ),
         );
       }
     },
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 app.use(cookieParser());
 
 // Database connection
 dbConnect(() => {
-  app.listen(3000, () => {
-    console.log("Server listening to port : 3000");
+  app.listen(process.env.PORT, () => {
+    console.log(`Server listening to port : ${process.env.PORT}`);
   });
 });
 
