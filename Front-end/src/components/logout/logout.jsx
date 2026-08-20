@@ -15,7 +15,7 @@ const Logout = () => {
         navigate("/login");
       }
     })();
-  }, []);
+  }, [clearStorage, navigate]);
 
   return null;
 };

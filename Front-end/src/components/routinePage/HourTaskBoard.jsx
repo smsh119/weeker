@@ -12,7 +12,7 @@ const HourTaskBoard = ({ tasks, time, day, onDelete, onAddTask }) => {
     handleSubmit,
     reset,
     watch,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm({
     defaultValues: {
       taskColor: "#f59e0b",
