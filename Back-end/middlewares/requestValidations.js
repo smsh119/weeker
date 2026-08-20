@@ -10,8 +10,10 @@ const validateRegistrationForm = [
   body("password")
     .trim()
     .notEmpty()
-    .isLength({ min: 6, max: 32 })
-    .withMessage("Please provide valid password!"),
+    .isLength({ min: 8, max: 32 })
+    .withMessage("Password must contain at least 8 characters!")
+    .matches(/^(?=.*[a-zA-Z])(?=.*\d)/)
+    .withMessage("Password must contain at least one letter and one number!"),
 ];
 
 const validateLoginForm = [

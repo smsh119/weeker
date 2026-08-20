@@ -6,7 +6,11 @@ export const RegistrationFormSchema = z.object({
   password: z
     .string()
     .trim()
-    .min(8, { message: "Password must contain at least 8 characters!" }),
+    .min(8, { message: "Password must contain at least 8 characters!" })
+    .regex(/[a-zA-Z]/, {
+      message: "Password must contain at least one letter!",
+    })
+    .regex(/\d/, { message: "Password must contain at least one number!" }),
 });
 
 export const LoginFormSchema = z.object({
