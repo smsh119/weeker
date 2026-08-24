@@ -68,6 +68,11 @@ const LoginPage = () => {
         <div className="formError">{errors.password.message}</div>
       )}
       {errors?.root && <div className="formError">{errors.root.message}</div>}
+      {errors?.root && (
+        <div>
+          <Link to="/forgot-password">Forgot password?</Link>
+        </div>
+      )}
       <div>
         <p>{`Don't have an account?`}</p>
         <Link to="/register">Register now</Link>

@@ -8,6 +8,7 @@ const { hashToken } = require("../utils/utils.js");
 const { sendEmail } = require("../services/emailService.js");
 const {
   getVerificationEmailHtml,
+  getResetPasswordEmailHtml,
 } = require("../services/emailTemplates/emailTemplates.js");
 
 const registerUser = async (req, res) => {
@@ -189,9 +190,7 @@ const resendVerificationEmail = async (req, res) => {
       user.resendCount >= RESEND_LIMIT
     ) {
       res.status(429).json({
-        errors: [
-          "Too many requests. Please try again after 24 hours.",
-        ],
+        errors: ["Too many requests. Please try again after 24 hours."],
       });
       return;
     }
@@ -225,10 +224,121 @@ const resendVerificationEmail = async (req, res) => {
   }
 };
 
+const RESET_REQUEST_LIMIT = 2;
+const RESET_REQUEST_WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
+const RESET_TOKEN_EXPIRY_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+const forgotPassword = async (req, res) => {
+  const { errors } = validationResult(req);
+  if (errors.length > 0) {
+    res.status(400).json({ errors: errors.map((err) => err.msg) });
+    return;
+  }
+
+  try {
+    const { email } = req.body;
+    const genericMessage =
+      "If an account with that email exists, a password reset link has been sent.";
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      res.status(200).json({ message: genericMessage });
+      return;
+    }
+
+    const now = Date.now();
+    if (
+      user.lastResetRequestAt &&
+      now - user.lastResetRequestAt.getTime() < RESET_REQUEST_WINDOW_MS &&
+      user.resetRequestCount >= RESET_REQUEST_LIMIT
+    ) {
+      res.status(429).json({
+        errors: ["Too many reset requests. Please try again after 24 hours."],
+      });
+      return;
+    }
+
+    if (
+      !user.lastResetRequestAt ||
+      now - user.lastResetRequestAt.getTime() >= RESET_REQUEST_WINDOW_MS
+    ) {
+      user.resetRequestCount = 0;
+    }
+
+    const { verificationToken, hashedToken } = generateVerificationToken();
+
+    // new request invalidates any previous reset link
+    user.resetPasswordToken = hashedToken;
+    user.resetPasswordExpiresAt = now + RESET_TOKEN_EXPIRY_MS;
+    user.resetRequestCount = (user.resetRequestCount || 0) + 1;
+    user.lastResetRequestAt = new Date(now);
+    await user.save();
+
+    const resetUrl = `${process.env.CLIENT_URL}/reset-password?token=${verificationToken}&email=${user.email}`;
+    const emailHtml = getResetPasswordEmailHtml({
+      fullname: user.fullname,
+      resetUrl,
+    });
+    await sendEmail(user.email, "Weeker: Reset your password", emailHtml);
+
+    res.status(200).json({ message: genericMessage });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ errors: ["Internal Server Error!"] });
+  }
+};
+
+const resetPassword = async (req, res) => {
+  const { errors } = validationResult(req);
+  if (errors.length > 0) {
+    res.status(400).json({ errors: errors.map((err) => err.msg) });
+    return;
+  }
+
+  const { token, email, newPassword } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user || !user.resetPasswordToken) {
+      res.status(400).json({ errors: ["Invalid or expired reset link!"] });
+      return;
+    }
+
+    const hashedToken = hashToken(token);
+    if (user.resetPasswordToken !== hashedToken) {
+      res.status(400).json({ errors: ["Invalid or expired reset link!"] });
+      return;
+    }
+
+    if (user.resetPasswordExpiresAt < Date.now()) {
+      res.status(400).json({ errors: ["Invalid or expired reset link!"] });
+      return;
+    }
+
+    user.password = await bcrypt.hash(newPassword, process.env.SALT_ROUNDS * 1);
+
+    // clear token and the rate limit counters
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpiresAt = undefined;
+    user.resetRequestCount = 0;
+    user.lastResetRequestAt = undefined;
+    await user.save();
+
+    res.status(200).json();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ errors: ["Internal Server Error!"] });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
   logoutUser,
   verifyEmail,
   resendVerificationEmail,
+  forgotPassword,
+  resetPassword,
 };

@@ -18,6 +18,27 @@ export const LoginFormSchema = z.object({
   password: z.string().trim().min(1, { message: "Password can not be empty!" }),
 });
 
+export const ForgotPasswordSchema = z.object({
+  email: z.string().trim().email({ message: "Please provide a valid email!" }),
+});
+
+export const ResetPasswordSchema = z
+  .object({
+    newPassword: z
+      .string()
+      .trim()
+      .min(8, { message: "Password must contain at least 8 characters!" })
+      .regex(/[a-zA-Z]/, {
+        message: "Password must contain at least one letter!",
+      })
+      .regex(/\d/, { message: "Password must contain at least one number!" }),
+    confirmPassword: z.string().trim(),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Passwords do not match!",
+    path: ["confirmPassword"],
+  });
+
 export const AddTaskSchema = z.object({
   taskDescription: z
     .string()

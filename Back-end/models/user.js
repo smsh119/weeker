@@ -40,7 +40,20 @@ const UserSchema = new mongoose.Schema(
     },
     lastResendAt: {
       type: Date,
-    }
+    },
+    resetPasswordToken: {
+      type: String,
+    },
+    resetPasswordExpiresAt: {
+      type: Date,
+    },
+    resetRequestCount: {
+      type: Number,
+      default: 0,
+    },
+    lastResetRequestAt: {
+      type: Date,
+    },
   },
   { timestamps: true }
 );

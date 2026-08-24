@@ -29,6 +29,30 @@ const validateLoginForm = [
     .withMessage("Wrong email or password! Please try again."),
 ];
 
+const validateForgotPassword = [
+  body("email")
+    .trim()
+    .notEmpty()
+    .isEmail()
+    .withMessage("Please provide valid email!"),
+];
+
+const validateResetPasswordForm = [
+  body("token").trim().notEmpty().withMessage("Invalid or expired reset link!"),
+  body("email")
+    .trim()
+    .notEmpty()
+    .isEmail()
+    .withMessage("Please provide valid email!"),
+  body("newPassword")
+    .trim()
+    .notEmpty()
+    .isLength({ min: 8, max: 32 })
+    .withMessage("Password must contain at least 8 characters!")
+    .matches(/^(?=.*[a-zA-Z])(?=.*\d)/)
+    .withMessage("Password must contain at least one letter and one number!"),
+];
+
 const validateUserSettings = [
   body("startDayIndex")
     .isInt({ min: 0, max: 6 })
@@ -45,5 +69,7 @@ const validateUserSettings = [
 module.exports = {
   validateRegistrationForm,
   validateLoginForm,
+  validateForgotPassword,
+  validateResetPasswordForm,
   validateUserSettings,
 };
