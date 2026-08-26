@@ -2,12 +2,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import usePageMeta from "../../hooks/usePageMeta";
 import { LoginFormSchema } from "../../services/formValidation";
 import http from "../../services/httpServices.js";
 import styles from "../common/css/authPages.module.css";
 const LoginPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  usePageMeta({ title: "Log In" });
   const { setStorage } = useLocalStorage();
   const {
     register,

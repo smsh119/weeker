@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://weeker.suzatsmsh.cloud/sitemap.xml

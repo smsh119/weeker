@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import { toast } from "sonner";
+import usePageMeta from "../../hooks/usePageMeta";
 import { ResetPasswordSchema } from "../../services/formValidation";
 import http from "../../services/httpServices.js";
 import styles from "../common/css/authPages.module.css";
@@ -10,6 +11,7 @@ import styles from "../common/css/authPages.module.css";
 const ResetPasswordPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  usePageMeta({ title: "Reset Your Password", noindex: true });
 
   const token = searchParams.get("token");
   const email = searchParams.get("email");

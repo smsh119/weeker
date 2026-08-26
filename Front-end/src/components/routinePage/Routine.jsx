@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import usePageMeta from "../../hooks/usePageMeta";
 import useTasks from "../../hooks/useTasks";
 import { getHours } from "../../utils/formatHour";
 import { getWeekDays } from "../../utils/weekDays";
@@ -16,6 +17,7 @@ const Routine = () => {
   const [hourTaskBoardVisible, setHourTaskBoardVisible] = useState(false);
   const [modalOptions, setModalOptions] = useState({ day: "", time: "" });
   const navigate = useNavigate();
+  usePageMeta({ noindex: true });
   const { tasks, loading, deleteTask, addTask } = useTasks();
   const { clearStorage, getStorage } = useLocalStorage();
 

@@ -2,12 +2,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
+import usePageMeta from "../../hooks/usePageMeta";
 import { ForgotPasswordSchema } from "../../services/formValidation";
 import http from "../../services/httpServices.js";
 import styles from "../common/css/authPages.module.css";
 
 const ForgotPasswordPage = () => {
   const navigate = useNavigate();
+  usePageMeta({ title: "Reset Your Password", noindex: true });
   const {
     register,
     handleSubmit,

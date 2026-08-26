@@ -1,6 +1,7 @@
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import useLocalStorage from "../../hooks/useLocalStorage.js";
+import usePageMeta from "../../hooks/usePageMeta.js";
 import http from "../../services/httpServices.js";
 import { formatHour, getHours } from "../../utils/formatHour.js";
 import { getWeekDay, getWeekDays } from "../../utils/weekDays.js";
@@ -8,6 +9,7 @@ import Select from "../common/Select.jsx";
 import styles from "./settingsPage.module.css";
 
 const SettingsPage = () => {
+  usePageMeta({ noindex: true });
   const { setStorage, getStorage } = useLocalStorage();
   const {
     handleSubmit,

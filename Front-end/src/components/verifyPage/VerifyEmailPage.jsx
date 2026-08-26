@@ -2,12 +2,14 @@ import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "sonner";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import usePageMeta from "../../hooks/usePageMeta";
 import http from "../../services/httpServices.js";
 
 const VerifyEmailPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { getStorage, setStorage } = useLocalStorage();
+  usePageMeta({ noindex: true });
 
   const token = searchParams.get("token");
   const email = searchParams.get("email");

@@ -1,12 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
+import usePageMeta from "../../hooks/usePageMeta";
 import { RegistrationFormSchema } from "../../services/formValidation";
 import http from "../../services/httpServices.js";
 import styles from "../common/css/authPages.module.css";
 
 const RegistrationPage = () => {
   const navigate = useNavigate();
+  usePageMeta({ title: "Create Your Account" });
   const {
     register,
     handleSubmit,
