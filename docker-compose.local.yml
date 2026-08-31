@@ -1,0 +1,12 @@
+services:
+  backend:
+    networks:
+      - default
+
+  frontend:
+    ports:
+      - "3001:80"
+
+networks:
+  shared-network:
+    external: false
