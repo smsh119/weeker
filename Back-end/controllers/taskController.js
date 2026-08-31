@@ -5,23 +5,28 @@ const addTask = async (req, res) => {
   const data = req.body;
   try {
     const tasks = await TaskCollection.findOne({ userId: user.id });
+    const taskEntry = {
+      ...data.task,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
     if (!tasks[data.day]) {
       tasks[data.day] = new Map();
-      tasks[data.day].set(data.time, [data.task]);
+      tasks[data.day].set(data.time, [taskEntry]);
     } else {
       let tasksAtTime = tasks[data.day].get(data.time);
       if (!tasksAtTime) {
-        tasks[data.day].set(data.time, [data.task]);
+        tasks[data.day].set(data.time, [taskEntry]);
       } else {
-        tasks[data.day].set(data.time, [...tasksAtTime, data.task]);
+        tasks[data.day].set(data.time, [...tasksAtTime, taskEntry]);
       }
     }
-    const savedTasks = await TaskCollection(tasks).save();
+    const savedTasks = await tasks.save();
     const savedTasksAtTime = Object.fromEntries(savedTasks[data.day])[
       data.time
     ];
     savedTasksAtTime.sort((a, b) =>
-      b.createdAt.toString().localeCompare(a.createdAt.toString())
+      b.createdAt.toString().localeCompare(a.createdAt.toString()),
     );
     res.status(201).json(savedTasksAtTime[0]);
   } catch (err) {
@@ -85,11 +90,11 @@ const deleteTask = async (req, res) => {
       } else {
         tasks[day].set(
           time,
-          tasksAtTime.filter((task) => task._id.toString() !== id)
+          tasksAtTime.filter((task) => task._id.toString() !== id),
         );
       }
     }
-    await TaskCollection(tasks).save();
+    await tasks.save();
 
     res.status(200).json();
   } catch (err) {
